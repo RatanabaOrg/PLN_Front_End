@@ -22,6 +22,7 @@ function AccessHistory() {
       area: "Área 1",
     },
   ];
+
   return (
     <>
       <Header />
