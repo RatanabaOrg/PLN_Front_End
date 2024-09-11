@@ -4,7 +4,7 @@
 
 #access-history-title {
     font-weight: 400;
-    font-size: 3vh;
+    font-size: 1.8em;
     color: #022035;
     padding-bottom: 3vh;
 }
@@ -24,7 +24,7 @@ table tr{
 } 
 
 table th, table td{
-    padding: 1.1em;
+    padding: 1.2em;
     text-align: center;
 }
 
