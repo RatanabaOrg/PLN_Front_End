@@ -18,7 +18,7 @@ export default function ModalProvider ({ children }) {
     useEffect(() => {
         const interval = setInterval(() => {
             setIsModalVisible(true);
-        }, 2 * 60 * 1000); // 2 minutos
+        }, 30 * 1000); // 2 minutos
 
         return () => clearInterval(interval);
     }, []);
