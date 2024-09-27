@@ -5,12 +5,39 @@ import NavBar from "../../../components/navBar";
 import "./index.css";
 
 function RegistryArea() {
-  const fetchData = async () => {
+
+  const [name, setName] = useState("");
+  const [securityLevel, setSecurityLevel] = useState("");
+  const [areaCode, setAreaCode] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = {
+      "name": name,
+      "security": securityLevel,
+      "area": areaCode,
+      "location": location,
+      "description": description,
+    };
+
+    console.log(formData);
+
+
     try {
-      const response = await axios.get("http://localhost:3000/visualizar");
+      const response = await axios.post("http://localhost:3000/cadastro/area", formData);
+      console.log("Dados salvos com sucesso:", response.data);
     } catch (error) {
-      console.error("Erro ao buscar o histórico de acessos:", error);
+      console.error("Erro ao salvar os dados:", error);
     }
+
+    setName('');
+    setSecurityLevel('');
+    setAreaCode('');
+    setLocation('');
+    setDescription('');
   };
 
   return (
@@ -19,16 +46,16 @@ function RegistryArea() {
       <div className="container">
         <NavBar />
         <div id="registry-areas-container">
-          <form id="form-area">
+          <form id="form-area" onSubmit={handleSubmit}>
             <div className="input-div-areas">
               <div className="form-group">
                 <label htmlFor="name">Nome</label>
-                <input type="text" id="name" name="name" placeholder="Nome" />
+                <input type="text" id="name" name="name" placeholder="Nome" value={name} onChange={(e) => setName(e.target.value)} />
               </div>
 
               <div className="form-group">
                 <label htmlFor="security-level">Nível de segurança</label>
-                <select id="security-level" name="security-level">
+                <select id="security-level" name="security-level" value={securityLevel} onChange={(e) => setSecurityLevel(e.target.value)}>
                   <option value="" disabled selected>
                     Selecione
                   </option>
@@ -48,6 +75,8 @@ function RegistryArea() {
                     id="area-code"
                     name="area-code"
                     placeholder="Código"
+                    value={areaCode}
+                    onChange={(e) => setAreaCode(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -56,6 +85,8 @@ function RegistryArea() {
                     id="location"
                     name="location"
                     placeholder="Localização"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
                   ></textarea>
                 </div>
               </div>
@@ -65,12 +96,14 @@ function RegistryArea() {
                   id="description"
                   name="description"
                   placeholder="Descrição"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
               </div>
             </div>
             <div id="button-div">
               <button type="submit" className="submit-button">
-                Entrar
+                Salvar 
               </button>
             </div>
           </form>
