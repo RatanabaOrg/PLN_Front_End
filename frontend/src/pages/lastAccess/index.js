@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../../components/header";
 import NavBar from "../../components/navBar";
-import "./index.css";
+import "../accessHistory/index";
 
-function AccessHistory() {
+function LastAccess() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
@@ -63,4 +63,4 @@ function AccessHistory() {
   );
 }
 
-export default AccessHistory;
+export default LastAccess;

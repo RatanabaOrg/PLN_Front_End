@@ -6,15 +6,14 @@
 }
 
 #logo {
-    width: 3.5vw;
+    width: 100%;
 }
 
 #logo-div {
     display: flex;
     background-color: #022035;
     border-radius: 20px;
-    height: 7vh;
-    width: 3.5vw;
+    width: 3.7%;
     align-items: center;
     justify-content: center;
 }
@@ -23,9 +22,9 @@ h1{
     font-size: 1.8em;
 }
 
-#header-horizontal-line {
+.header-horizontal-line {
     height: 1px;
     background-color: #e9e9e9; 
-    margin: 2vh 0; 
+    margin: 1.3rem 0; 
     border: none;
 }

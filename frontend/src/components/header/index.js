@@ -10,7 +10,7 @@ function Header() {
             </div>
             <h1>Ratanaba</h1>
         </div>
-        <hr id="header-horizontal-line"></hr>
+        <hr className="header-horizontal-line"></hr>
       </div>
     );
   }
