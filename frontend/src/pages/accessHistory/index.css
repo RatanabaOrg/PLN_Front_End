@@ -1,14 +1,18 @@
+.container {
+    display: flex;
+}
+
 #access-history-container {
-    margin: 10vh 18vw;
+    width: 87.25%;
+    padding: 5.2rem 14rem;
 }
 
 #access-history-title {
     font-weight: 400;
-    font-size: 1.8em;
+    font-size: 1.8rem;
     color: #022035;
-    padding-bottom: 3vh;
+    padding-bottom: 1.9rem;
 }
-
 
 table {
     border-collapse: collapse;
@@ -20,15 +24,14 @@ table {
 
 table tr{
     border-bottom: 1px solid #dedede;
-    padding: .35em;
 } 
 
 table th, table td{
-    padding: 1.2em;
+    padding: 1.4rem;
     text-align: start;
 }
 
 table th{
-  font-size: 1em;
-  letter-spacing: .1em;
+  font-size: 1rem;
+  letter-spacing: .1rem;
 }

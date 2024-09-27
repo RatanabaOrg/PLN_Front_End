@@ -1,0 +1,33 @@
+#navBar {
+    width: 12.75%;
+    height: 85vh;
+    margin-left: 0.75rem;
+}
+
+.menu-title {
+    margin-bottom: 0.625rem;
+    color: #666; 
+    font-weight: bold;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none; 
+    padding: 0;
+    gap: 5px;
+}
+
+.menu-list li {
+    display: flex;
+    padding: 1rem 0.75rem;
+    border-radius: 5px; 
+    align-items: center;
+    gap: 10px
+}
+
+.menu-list li:hover, .menu-list li.active {
+    background-color: #eee; 
+    cursor: pointer;
+    border-radius: 30px;
+}
