@@ -10,7 +10,7 @@ function AccessHistory() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/visualizar');
+        const response = await axios.get('http://localhost:3000/visualizar/ultimos/acessos');
         setList(response.data);
       } catch (error) {
         console.error("Erro ao buscar o histórico de acessos:", error);
