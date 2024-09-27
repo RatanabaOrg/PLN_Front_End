@@ -1,7 +1,7 @@
 #registry-areas-container {
     display: flex;
     width: 87.25%;
-    padding: 10rem 16rem;
+    padding: 12rem 16rem;
 }
 
 #form-area {
@@ -70,7 +70,7 @@
 
 .submit-button {
     padding: 0.8rem 12rem;
-    background-color: #0096FF; 
+    background-color: #0A8FEF; 
     color: white;
     border: none;
     font-weight: 500;

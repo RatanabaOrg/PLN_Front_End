@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../../components/header";
-import NavBar from "../../components/navBar";
+import Header from "../../../components/header";
+import NavBar from "../../../components/navBar";
+import { FiFileText } from "react-icons/fi";
+import { FaTrash } from "react-icons/fa";
 import "./index.css";
 
-function AccessHistory() {
+function VisualizeAreas() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/visualizar/historico');
+        const response = await axios.get('http://localhost:3000/visualizar/areas');
         setList(response.data);
       } catch (error) {
         console.error("Erro ao buscar o histórico de acessos:", error);
@@ -29,31 +31,31 @@ function AccessHistory() {
       <Header />
       <div className="container">
         <NavBar />
-        <div id="access-history-container">
-          <h1 id="access-history-title">Histórico de acessos</h1>
+        <div id="visualize-areas-container">
+          <h1 id="visualize-areas-title">Visualizar Áreas</h1>
           {list && list.length > 0 ? (
             <table>
               <thead>
                 <tr>
-                  <th scope="col">Data</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Área</th>
+                  <th id="name-area"scope="col">Nome</th>
+                  <th className="icons-area" scope="col">Visualizar</th>
+                  <th className="icons-area" scope="col">Excluir</th>
                 </tr>
               </thead>
               <tbody>
                   {list.map((value) => (
                     !value.envio && (
                       <tr key={value.id}>
-                        <td data-label="Data">{value.data}</td>
-                        <td data-label="Nome">{value.name}</td>
-                        <td data-label="Área">{value.area}</td>
+                        <td id="name-area" data-label="Nome">{value.name}</td>
+                        <td className="icons-area" data-label="Visualizar"><FiFileText className="icon-file-text" color={'#0A8FEF'} size={25}/></td>
+                        <td className="icons-area" data-label="Excluir"><FaTrash color={'#D01A1A'} size={25}/></td>
                       </tr>
                     )
                   ))}
               </tbody>
             </table>): (
               <tr>
-                <td colSpan="3">Nenhum acesso realizado.</td>
+                <td colSpan="3">Nenhuma área cadastrada.</td>
               </tr>
             )}
         </div>
@@ -62,4 +64,4 @@ function AccessHistory() {
   );
 }
 
-export default AccessHistory;
+export default VisualizeAreas;
