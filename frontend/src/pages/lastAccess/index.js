@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../../components/header";
 import NavBar from "../../components/navBar";
-import "./index.css";
+import "../accessHistory/index.css";
 
 function AccessHistory() {
   const [list, setList] = useState([]);
@@ -10,7 +10,7 @@ function AccessHistory() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/visualizar/historico');
+        const response = await axios.get('http://localhost:3000/visualizar');
         setList(response.data);
       } catch (error) {
         console.error("Erro ao buscar o histórico de acessos:", error);
@@ -30,7 +30,7 @@ function AccessHistory() {
       <div className="container">
         <NavBar />
         <div id="access-history-container">
-          <h1 id="access-history-title">Histórico de acessos</h1>
+          <h1 id="access-history-title">Últimos acessos</h1>
           {list && list.length > 0 ? (
             <table>
               <thead>

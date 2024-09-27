@@ -1,11 +1,11 @@
-import AccessHistory from './pages/accessHistory';
-import ModalProvider from './contexts/modal';
+import { BrowserRouter as Router } from 'react-router-dom';
+import RoutesApp from './routes';
 
 function App() {
   return (
-    <ModalProvider>
-      <AccessHistory/>
-    </ModalProvider>
+    <Router>
+      <RoutesApp />
+    </Router>
   );
 }
 
