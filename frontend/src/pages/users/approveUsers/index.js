@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../../../components/header";
 import NavBar from "../../../components/navBar";
-import { FiFileText } from "react-icons/fi";
 import { FaTrash } from "react-icons/fa";
+import { GoCheckCircleFill } from "react-icons/go"
 import "./index.css";
 
 function ApproveUsers() {
@@ -12,7 +12,7 @@ function ApproveUsers() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/visualizar/areas');
+        const response = await axios.get('http://localhost:3000/visualizar/usuariosParaAprovar');
         setList(response.data);
       } catch (error) {
         console.error("Erro ao buscar o histórico de acessos:", error);
@@ -32,13 +32,13 @@ function ApproveUsers() {
       <div className="container">
         <NavBar />
         <div id="visualize-areas-container">
-          <h1 id="visualize-areas-title">Visualizar Áreas</h1>
+          <h1 id="visualize-areas-title">Aprovar conta</h1>
           {list && list.length > 0 ? (
             <table>
               <thead>
                 <tr>
                   <th id="name-area"scope="col">Nome</th>
-                  <th className="icons-area" scope="col">Visualizar</th>
+                  <th className="icons-area" scope="col">Aprovar</th>
                   <th className="icons-area" scope="col">Excluir</th>
                 </tr>
               </thead>
@@ -47,8 +47,8 @@ function ApproveUsers() {
                     !value.envio && (
                       <tr key={value.id}>
                         <td id="name-area" data-label="Nome">{value.name}</td>
-                        <td className="icons-area" data-label="Visualizar"><FiFileText className="icon-file-text" color={'#0A8FEF'} size={25}/></td>
-                        <td className="icons-area" data-label="Excluir"><FaTrash color={'#D01A1A'} size={25}/></td>
+                        <td className="icons-area" data-label="Visualizar"><GoCheckCircleFill color={'#44A754'} size={35}/></td>
+                        <td className="icons-area" data-label="Excluir"><FaTrash color={'#D01A1A'} size={30}/></td>
                       </tr>
                     )
                   ))}
