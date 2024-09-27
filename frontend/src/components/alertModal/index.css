@@ -70,7 +70,7 @@
     gap: 4px
 }
 
-#name, #area {
+.input-div #name,.input-div #area {
     border: 1px solid #D9D9D9;
     border-radius: 8px;
     width: 23vw;

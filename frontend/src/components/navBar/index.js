@@ -1,14 +1,19 @@
-import "./index.css";import React, { useState } from 'react';
+import "./index.css";
+import React, { useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { GoClock, GoGraph, GoListUnordered } from 'react-icons/go';
 import { BsArrowLeftRight } from 'react-icons/bs';
 import { IoAddCircleOutline, IoPersonAddOutline } from 'react-icons/io5';
 import { PiUserSquare } from 'react-icons/pi';
 
 function NavBar() {
-  const [activeItem, setActiveItem] = useState('histórico');
+  const location = useLocation();
+  const [activeItem, setActiveItem] = useState(location.pathname);
 
   const handleHover = (item) => {
-    setActiveItem(item); 
+
+      setActiveItem(item);
+    
   };
 
   return (
@@ -16,17 +21,21 @@ function NavBar() {
       <div className="menu-section">
         <p className="menu-title">ACESSOS</p>
         <ul className="menu-list">
-          <li href="/ultimosacessos"
-            className={activeItem === 'últimos' ? 'active' : ''}
-            onClick={() => handleHover('últimos')}
+          <li
+            className={activeItem === '/ultimosacessos' ? 'active' : ''}
+            onClick={() => handleHover('/ultimosacessos')}
           >
-            <GoClock size={23} /> Últimos
+            <Link to="/ultimosacessos" className="menu-link">
+              <GoClock size={23} /> Últimos
+            </Link>  
           </li>
-          <li href="/historico"
-            className={activeItem === 'histórico' ? 'active' : ''}
-            onClick={() => handleHover('histórico')}
+          <li
+            className={activeItem === '/historico' ? 'active' : ''}
+            onClick={() => handleHover('/historico')}
           >
-            <BsArrowLeftRight size={22} /> Histórico
+            <Link to="/historico" className="menu-link">
+              <BsArrowLeftRight size={22} /> Histórico
+            </Link>
           </li>
           <li
             className={activeItem === 'dashboard' ? 'active' : ''}
@@ -41,16 +50,20 @@ function NavBar() {
         <p className="menu-title">ÁREAS</p>
         <ul className="menu-list">
           <li
-            className={activeItem === 'cadastrar-areas' ? 'active' : ''}
-            onClick={() => handleHover('cadastrar-areas')}
+            className={activeItem === '/cadastrararea' ? 'active' : ''}
+            onClick={() => handleHover('/cadastrararea')}
           >
-            <IoAddCircleOutline size={26} /> Cadastrar
+            <Link to="/cadastrararea" className="menu-link">
+              <IoAddCircleOutline size={26} /> Cadastrar
+            </Link>
           </li>
           <li
-            className={activeItem === 'visualizar-areas' ? 'active' : ''}
-            onClick={() => handleHover('visualizar-areas')}
+            className={activeItem === '/visualizarareas' ? 'active' : ''}
+            onClick={() => handleHover('/visualizarareas')}
           >
-            <GoListUnordered size={25} /> Visualizar
+            <Link to="/visualizarareas" className="menu-link">
+              <GoListUnordered size={25} /> Visualizar
+            </Link>
           </li>
         </ul>
       </div>
@@ -59,16 +72,20 @@ function NavBar() {
         <p className="menu-title">USUÁRIOS</p>
         <ul className="menu-list">
           <li
-            className={activeItem === 'cadastrar-usuarios' ? 'active' : ''}
-            onClick={() => handleHover('cadastrar-usuarios')}
+            className={activeItem === '/aprovarusuarios' ? 'active' : ''}
+            onClick={() => handleHover('/aprovarusuarios')}
           >
-            <IoPersonAddOutline size={24} /> Cadastrar
+            <Link to="/aprovarusuarios" className="menu-link">
+              <IoPersonAddOutline size={24} /> Aprovar
+            </Link>
           </li>
           <li
-            className={activeItem === 'visualizar-usuarios' ? 'active' : ''}
-            onClick={() => handleHover('visualizar-usuarios')}
+            className={activeItem === '/visualizarusuarios' ? 'active' : ''}
+            onClick={() => handleHover('/visualizarusuarios')}
           >
-            <PiUserSquare size={27} /> Visualizar
+            <Link to="/visualizarusuarios" className="menu-link">
+              <PiUserSquare size={27} /> Visualizar
+            </Link>
           </li>
         </ul>
       </div>
