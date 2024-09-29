@@ -59,9 +59,9 @@ function RegistryArea() {
                   <option value="" disabled selected>
                     Selecione
                   </option>
-                  <option value="1">Baixo</option>
-                  <option value="2">Médio</option>
-                  <option value="3">Alto</option>
+                  <option value="Baixo">Baixo</option>
+                  <option value="Medio">Médio</option>
+                  <option value="Alto">Alto</option>
                 </select>
               </div>
             </div>

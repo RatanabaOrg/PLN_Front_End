@@ -53,7 +53,7 @@ function ViewModalArea({ user, onClose }) {
     return (
         <div id="expanded-modal">
             <div id="expanded-modal-content">
-                <form id="form-area" onSubmit={handleSubmit}>
+                <form id="form-area-modal" onSubmit={handleSubmit}>
                 <div className='input-div'>
                         <label htmlFor="name">Nome:</label>
                         <input
@@ -74,12 +74,19 @@ function ViewModalArea({ user, onClose }) {
                     </div>
                     <div className='input-div'>
                         <label htmlFor="security">Nível de segurança:</label>
-                        <input
-                            type="text"
+                        <select
                             id="security"
+                            name="security"
                             value={security}
                             onChange={(e) => setSecurity(e.target.value)}
-                        />
+                        >
+                            <option value="" disabled selected>
+                                Selecione
+                            </option>
+                            <option value="Baixo">Baixo</option>
+                            <option value="Medio">Médio</option>
+                            <option value="Alto">Alto</option>
+                        </select>
                     </div>
                     <div className='input-div'>
                         <label htmlFor="location">Localização:</label>
