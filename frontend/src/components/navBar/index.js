@@ -37,12 +37,12 @@ function NavBar() {
               <BsArrowLeftRight size={22} /> Histórico
             </Link>
           </li>
-          <li
+          {/* <li
             className={activeItem === 'dashboard' ? 'active' : ''}
             onClick={() => handleHover('dashboard')}
           >
             <GoGraph size={23} /> Dashboard
-          </li>
+          </li> */}
         </ul>
       </div>
       <hr className="header-horizontal-line" />

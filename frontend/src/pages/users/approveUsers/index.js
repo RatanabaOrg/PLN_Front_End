@@ -5,9 +5,12 @@ import NavBar from "../../../components/navBar";
 import { FaTrash } from "react-icons/fa";
 import { GoCheckCircleFill } from "react-icons/go"
 import "./index.css";
+import ApproveUserModal from "../../../components/approveUserModal";
 
 function ApproveUsers() {
   const [list, setList] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +28,17 @@ function ApproveUsers() {
 
     return () => clearInterval(intervalId);
   }, []); 
+
+  const handleViewClick = (user) => {
+    setSelectedUser(user);
+    setIsModalVisible(true);
+    console.log(selectedUser);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+    setSelectedUser(null);
+  };
 
   return (
     <>
@@ -47,7 +61,7 @@ function ApproveUsers() {
                     !value.envio && (
                       <tr key={value.id}>
                         <td id="name-area" data-label="Nome">{value.name}</td>
-                        <td className="icons-area" data-label="Visualizar"><GoCheckCircleFill color={'#44A754'} size={35}/></td>
+                        <td className="icons-area" onClick={() => handleViewClick(value)} data-label="Visualizar"><GoCheckCircleFill color={'#44A754'} size={35}/></td>
                         <td className="icons-area" data-label="Excluir"><FaTrash color={'#D01A1A'} size={30}/></td>
                       </tr>
                     )
@@ -59,6 +73,9 @@ function ApproveUsers() {
               </tr>
             )}
         </div>
+        {isModalVisible && (
+            <ApproveUserModal user={selectedUser} onClose={handleModalClose} />
+          )}
       </div>
     </>
   );

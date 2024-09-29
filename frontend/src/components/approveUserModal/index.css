@@ -1,4 +1,4 @@
-#expanded-modal {
+#del-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,12 +11,12 @@
     transition: all 0.3s ease;
 }
 
-#expanded-modal-content {
+#del-modal-content {
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255);
-    width: 45.5%;
-    height: 71.5%;
+    width: 25.5%;
+    height: 40.5%;
     margin-top: 1.2rem;
     margin-left: 2.7rem;
     border-radius: 15px;
@@ -24,43 +24,16 @@
     justify-content: center;
 }
 
-#form-area-modal {
-    display: flex;
-    flex-direction: column;
-    width: 55%;
-    height: 65%;
-    gap: 30px;
-    align-items: center;
-}
-
-.input-div {
-    display: flex;
-    flex-direction: column;
-    gap: 4px
-}
-
-.input-div #name,.input-div #code, .input-div #security,.input-div #location, .input-div #description {
-    border: 1px solid #D9D9D9;
-    border-radius: 8px;
-    width: 23vw;
-    height: 2.5rem;
-    padding: 1rem;
-}
-
-.form-group input, .form-group select {
-    height: 2.5rem;
-}
-
 #buttons-expanded-modal {
     display: flex;
-    width: 100%;
+    width: 70%;
     margin-top: 2.2%;
     display: flex;
     justify-content: space-around;
 }
 
-#submit-modal, #refuse-modal {
-    background-color: #44A754;
+#adm, #func-modal {
+    background-color: #D01A1A;
     border: none;
     padding: 1.2rem 1.4rem;
     border-radius: 8px;
@@ -68,7 +41,6 @@
     min-width: 40%;
 }
 
-#refuse-modal {
+#func-modal {
     background-color: #04385C;
-    color: white;
 }
