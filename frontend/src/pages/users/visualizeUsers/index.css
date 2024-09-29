@@ -14,3 +14,11 @@
     color: #022035;
     padding-bottom: 1.9rem;
 }
+
+.input-div #name, .input-div #email, .input-div #cpf, .input-div #telephone {
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    width: 23vw;
+    height: 2.5rem;
+    padding: 1rem;
+}

@@ -1,15 +1,3 @@
-#modal {
-    position: fixed;
-    bottom: 3%;
-    right: 1%;
-    padding: 0.7%; 
-    background-color: #F3FAFF; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
-    transition: all 0.3s ease;
-    z-index: 1000;
-}
-
 #expanded-modal {
     position: fixed;
     top: 0;
@@ -36,31 +24,12 @@
     justify-content: center;
 }
 
-#modal-content {
-    display: flex;
-    flex-direction: column;
-}
-
-
-#small-video {
-    border-radius: 8px;
-    width: 23rem;
-    height: 12rem;
-}
-
-#big-video {
-    margin-bottom: 4.5%;
-    border-radius: 8px;
-    height: 45%;
-    width: 65%;
-}
-
 #form {
     display: flex;
     flex-direction: column;
     width: 55%;
-    height: 40%;
-    gap: 24px;
+    height: 54%;
+    gap: 30px;
     align-items: center;
 }
 
@@ -75,15 +44,6 @@
     border-radius: 8px;
     width: 23vw;
     height: 2.5rem;
-    padding: 1rem;
-}
-
-#buttons-modal {
-    margin-top: 5%;
-    margin-bottom: 2%;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
 }
 
 #buttons-expanded-modal {
@@ -92,19 +52,6 @@
     margin-top: 2.2%;
     display: flex;
     justify-content: space-around;
-}
-
-#vizualize-modal, #close-modal {
-    border: none;
-    padding: 1rem 1.3rem;
-    border-radius: 8px;
-    background-color: #022035;
-    color: white;
-    min-width: 50%;
-}
-
-#close-modal {
-    background-color: #D01A1A;
 }
 
 #submit-modal, #refuse-modal {
