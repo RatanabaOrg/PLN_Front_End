@@ -4,6 +4,7 @@ import axios from "axios";
 
 function ApproveUserModal({ user, onClose }) {
     const [name, setName] = useState(user?.name || '');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         if (user) {
@@ -11,36 +12,39 @@ function ApproveUserModal({ user, onClose }) {
         }
     }, [user]);
 
-    const handleAdm = async (e) => {
-        e.preventDefault();
-        const formData = {
-            name
-        };
+    const handleUserUpdate = async (role) => {
+        console.log(user);
+        
+        const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.del(`http://localhost:3000/visualizar/usuario/${user.id}`, formData);
+            const response = await axios.put(`http://localhost:3000/atualizar/usuario/${user._id}`, 
+                {
+                    "approved": true,
+                    "role": role
+                }, 
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            );
             console.log(response.data);
+            onClose(); 
         } catch (error) {
-            console.error("Erro ao pegar os dados:", error);
+            console.error("Erro ao atualizar o usuário:", error);
+            setError("Erro ao atualizar o usuário. Tente novamente.");
         }
-
-        setName('');
-        onClose();
-    };
-
-    const handleFunc = (e) => {
-        e.preventDefault();
-        onClose();
     };
 
     return (
         <div id="del-modal">
             <div id="del-modal-content">
                 <p>O usuário possui qual cargo?</p>
-                    <div id="buttons-expanded-modal">
-                        <button id="func-modal" onClick={handleFunc}>Porteiro</button>
-                        <button onClick={handleAdm} id="adm">Adminstrador</button>
-                    </div>
+                <div id="buttons-expanded-modal">
+                    <button id="func-modal" onClick={() => handleUserUpdate("funcionario")}>Porteiro</button>
+                    <button onClick={() => handleUserUpdate("adm")} id="adm">Administrador</button>
+                </div>
             </div>
         </div>
     );

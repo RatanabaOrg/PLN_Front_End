@@ -5,14 +5,13 @@ import axios from "axios";
 function ViewModalUser({ user, onClose }) {
     const [name, setName] = useState(user?.name || '');
     const [email, setEmail] = useState(user?.email || '');
-    const [cpf, setCpf] = useState(user?.cpf || '');
     const [telephone, setTelephone] = useState(user?.telephone || '');
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         if (user) {
             setName(user.name);
             setEmail(user.email);
-            setCpf(user.cpf);
             setTelephone(user.telephone);
         }
     }, [user]);
@@ -22,12 +21,15 @@ function ViewModalUser({ user, onClose }) {
         const formData = {
             name,
             email,
-            cpf,
             telephone
         };
 
         try {
-            const response = await axios.post(`http://localhost:3000/visualizar/usuario/${user.id}`, formData);
+            const response = await axios.put(`http://localhost:3000/atualizar/usuario/${user._id}`, formData,        {
+                headers: {
+                  'Authorization': `Bearer ${token}`
+                }
+              });
             console.log(response.data);
         } catch (error) {
             console.error("Erro ao pegar os dados:", error);
@@ -35,7 +37,6 @@ function ViewModalUser({ user, onClose }) {
 
         setName('');
         setEmail('');
-        setCpf('');
         setTelephone('');
         onClose();
     };
@@ -65,15 +66,6 @@ function ViewModalUser({ user, onClose }) {
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-                    <div className='input-div'>
-                        <label htmlFor="cpf">CPF:</label>
-                        <input
-                            type="text"
-                            id="cpf"
-                            value={cpf}
-                            onChange={(e) => setCpf(e.target.value)}
                         />
                     </div>
                     <div className='input-div'>

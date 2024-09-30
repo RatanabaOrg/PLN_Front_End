@@ -11,8 +11,10 @@ import Login from "../pages/login"
 import SignIn from "../pages/signIn"
 
 function RoutesApp() {
-  return (
-    <ModalProvider>
+  const role = localStorage.getItem("role");
+  if (role == "adm") {
+    return (
+      <ModalProvider>
         <Routes>
           <Route path="/historico" element={<AccessHistory />} />
           <Route path="/ultimosacessos" element={<LastAccess />} />
@@ -23,9 +25,29 @@ function RoutesApp() {
           <Route path="/" element={<Login />} />
           <Route path="/criarconta" element={<SignIn />} />
         </Routes>
-    </ModalProvider>
-      
-  );
+      </ModalProvider>
+
+    );
+  } else if (role == "funcionario") {
+    return (
+      <ModalProvider>
+        <Routes>
+          <Route path="/historico" element={<AccessHistory />} />
+          <Route path="/ultimosacessos" element={<LastAccess />} />
+          <Route path="/visualizarareas" element={<VisualizeAreas />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/criarconta" element={<SignIn />} />
+        </Routes>
+      </ModalProvider>
+    );
+  } else {
+    return (
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/criarconta" element={<SignIn />} />
+      </Routes>
+    );
+  }
 }
 
 export default RoutesApp;

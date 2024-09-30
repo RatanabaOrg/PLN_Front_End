@@ -3,9 +3,10 @@ import axios from "axios";
 import Header from "../../../components/header";
 import NavBar from "../../../components/navBar";
 import "./index.css";
+import { ToastContainer, toast } from 'react-toastify';  
+import 'react-toastify/dist/ReactToastify.css';       
 
 function RegistryArea() {
-
   const [name, setName] = useState("");
   const [securityLevel, setSecurityLevel] = useState("");
   const [areaCode, setAreaCode] = useState("");
@@ -14,25 +15,37 @@ function RegistryArea() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem('token');
 
     const formData = {
-      "name": name,
-      "security": securityLevel,
-      "area": areaCode,
-      "location": location,
-      "description": description,
+      name,
+      security: securityLevel,
+      code: areaCode,
+      location,
+      description,
     };
 
     console.log(formData);
 
-
     try {
-      const response = await axios.post("http://localhost:3000/cadastro/area", formData);
-      console.log("Dados salvos com sucesso:", response.data);
+      const response = await axios.post(
+        "http://localhost:3000/cadastro/area",
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      );
+      toast.success("Dados salvos com sucesso.");
+      resetForm();
     } catch (error) {
-      console.error("Erro ao salvar os dados:", error);
+      console.error("Erro ao salvar os dados:", error.response ? error.response.data : error.message);
+      toast.error("Erro ao salvar os dados.");
     }
+  };
 
+  const resetForm = () => {
     setName('');
     setSecurityLevel('');
     setAreaCode('');
@@ -50,13 +63,25 @@ function RegistryArea() {
             <div className="input-div-areas">
               <div className="form-group">
                 <label htmlFor="name">Nome</label>
-                <input type="text" id="name" name="name" placeholder="Nome" value={name} onChange={(e) => setName(e.target.value)} />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Nome"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
 
               <div className="form-group">
                 <label htmlFor="security-level">Nível de segurança</label>
-                <select id="security-level" name="security-level" value={securityLevel} onChange={(e) => setSecurityLevel(e.target.value)}>
-                  <option value="" disabled selected>
+                <select
+                  id="security-level"
+                  name="security-level"
+                  value={securityLevel}
+                  onChange={(e) => setSecurityLevel(e.target.value)}
+                >
+                  <option value="" disabled>
                     Selecione
                   </option>
                   <option value="Baixo">Baixo</option>
@@ -87,7 +112,7 @@ function RegistryArea() {
                     placeholder="Localização"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                  ></textarea>
+                  />
                 </div>
               </div>
               <div className="form-group description">
@@ -98,15 +123,16 @@ function RegistryArea() {
                   placeholder="Descrição"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
+                />
               </div>
             </div>
             <div id="button-div">
               <button type="submit" className="submit-button">
-                Salvar 
+                Salvar
               </button>
             </div>
           </form>
+          <ToastContainer />
         </div>
       </div>
     </>

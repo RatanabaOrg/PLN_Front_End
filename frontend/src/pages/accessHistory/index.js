@@ -9,8 +9,14 @@ function AccessHistory() {
 
   useEffect(() => {
     const fetchData = async () => {
+      var token = localStorage.getItem('token');
+
       try {
-        const response = await axios.get('http://localhost:3000/visualizar/historico');
+        const response = await axios.get('http://localhost:3000/visualizar/historico', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         setList(response.data);
       } catch (error) {
         console.error("Erro ao buscar o histórico de acessos:", error);
@@ -38,6 +44,7 @@ function AccessHistory() {
                   <th scope="col">Data</th>
                   <th scope="col">Nome</th>
                   <th scope="col">Área</th>
+                  <th scope="col">Autorização</th>
                 </tr>
               </thead>
               <tbody>
@@ -47,6 +54,7 @@ function AccessHistory() {
                         <td data-label="Data">{value.data}</td>
                         <td data-label="Nome">{value.name}</td>
                         <td data-label="Área">{value.area}</td>
+                        <td data-label="Área">{value.authorization}</td>
                       </tr>
                     )
                   ))}

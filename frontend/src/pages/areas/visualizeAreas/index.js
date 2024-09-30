@@ -14,22 +14,20 @@ function VisualizeAreas() {
   const [isModalVisible2, setIsModalVisible2] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
+  const role = localStorage.getItem("role");
+
   const fetchData = async () => {
+    const token = localStorage.getItem('token');
+
     try {
-      const response = await axios.get('http://localhost:3000/visualizar/areas');
+      const response = await axios.get('http://localhost:3000/visualizar/areas', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       setList(response.data);
     } catch (error) {
       console.error("Erro ao buscar o histórico de acessos:", error);
-    }
-  };
-
-  const deleteArea = async (id) => {
-    try {
-      await axios.delete(`http://localhost:3000/deletar/area/${id}`);
-      fetchData();
-      console.log(`Área com ID ${id} excluída com sucesso.`);
-    } catch (error) {
-      console.error(`Erro ao excluir a área com ID ${id}:`, error);
     }
   };
 
@@ -37,17 +35,17 @@ function VisualizeAreas() {
     fetchData();
     const intervalId = setInterval(fetchData, 5000);
     return () => clearInterval(intervalId);
-  }, []); 
+  }, []);
 
   const handleViewClick = (user) => {
     setSelectedUser(user);
     setIsModalVisible(true);
-    console.log(selectedUser);
   };
 
   const handleModalClose = () => {
     setIsModalVisible(false);
     setSelectedUser(null);
+    fetchData(); // Atualiza a lista ao fechar o modal
   };
 
   const handleViewClick2 = (user) => {
@@ -58,6 +56,7 @@ function VisualizeAreas() {
   const handleModalClose2 = () => {
     setIsModalVisible2(false);
     setSelectedUser(null);
+    fetchData(); // Atualiza a lista ao fechar o modal de deleção
   };
 
   return (
@@ -73,27 +72,31 @@ function VisualizeAreas() {
                 <tr>
                   <th id="name-area" scope="col">Nome</th>
                   <th className="icons-area" scope="col">Visualizar</th>
-                  <th className="icons-area" scope="col">Excluir</th>
+                  {role === "adm" && (
+                    <th className="icons-area" scope="col">Excluir</th>
+                  )}
                 </tr>
               </thead>
               <tbody>
                 {list.map((value) => (
                   !value.envio && (
-                    <tr key={value.id}>
+                    <tr key={value._id}>
                       <td id="name-area" data-label="Nome">{value.name}</td>
                       <td className="icons-area" data-label="Visualizar">
-                        <FiFileText className="icon-file-text" color={'#0A8FEF'} size={25} 
-                          onClick={() => handleViewClick(value)} 
+                        <FiFileText className="icon-file-text" color={'#0A8FEF'} size={25}
+                          onClick={() => handleViewClick(value)}
                           style={{ cursor: 'pointer' }} />
                       </td>
-                      <td className="icons-area" data-label="Excluir">
-                        <FaTrash 
-                          color={'#D01A1A'} 
-                          size={25} 
-                          onClick={() => handleViewClick2(value)} 
-                          style={{ cursor: 'pointer' }} 
-                        />
-                      </td>
+                      {role === "adm" && (
+                        <td className="icons-area" data-label="Excluir">
+                          <FaTrash
+                            color={'#D01A1A'}
+                            size={25}
+                            onClick={() => handleViewClick2(value)}
+                            style={{ cursor: 'pointer' }}
+                          />
+                        </td>
+                      )}
                     </tr>
                   )
                 ))}

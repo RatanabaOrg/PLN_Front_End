@@ -1,30 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './index.css';
 import axios from "axios";
 
 function DelModalArea({ user, onClose }) {
-    const [name, setName] = useState(user?.name || '');
-
-    useEffect(() => {
-        if (user) {
-            setName(user.name);
-        }
-    }, [user]);
-
+    console.log(user);
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = {
-            name
-        };
+        const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.del(`http://localhost:3000/visualizar/usuario/${user.id}`, formData);
-            console.log(response.data);
+            const response = await axios.delete(`http://localhost:3000/deletar/area/${user._id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            console.log("Área deletada com sucesso:", response.data);
+            // Você pode adicionar lógica adicional aqui, como uma atualização do estado ou uma notificação
         } catch (error) {
-            console.error("Erro ao pegar os dados:", error);
+            console.error("Erro ao deletar a área:", error);
+            alert("Erro ao tentar deletar a área. Por favor, tente novamente."); // Feedback para o usuário
         }
 
-        setName('');
         onClose();
     };
 
@@ -37,10 +34,10 @@ function DelModalArea({ user, onClose }) {
         <div id="del-modal">
             <div id="del-modal-content">
                 <p>Você tem certeza que deseja apagar a área?</p>
-                    <div id="buttons-expanded-modal">
-                        <button id="goback-modal" onClick={handleRefuse}>Voltar</button>
-                        <button id="del-modal-button">Deletar</button>
-                    </div>
+                <div id="buttons-expanded-modal">
+                    <button id="goback-modal" onClick={handleRefuse}>Voltar</button>
+                    <button id="del-modal-button" onClick={handleSubmit}>Deletar</button>
+                </div>
             </div>
         </div>
     );

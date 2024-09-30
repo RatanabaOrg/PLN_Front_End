@@ -3,19 +3,24 @@ import './index.css';
 import axios from "axios";
 
 function ViewModalArea({ user, onClose }) {
-    const [name, setName] = useState(user?.name || '');
-    const [code, setCode] = useState(user?.code || '');
-    const [security, setSecurity] = useState(user?.security || '');
-    const [location, setLocation] = useState(user?.location || ''); 
-    const [description, setDescription] = useState(user?.description || '');
+    console.log(user);
+    
+    const [name, setName] = useState('');
+    const [code, setCode] = useState('');
+    const [security, setSecurity] = useState('');
+    const [location, setLocation] = useState('');
+    const [description, setDescription] = useState('');
+
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem("role");
 
     useEffect(() => {
         if (user) {
-            setName(user.name);
-            setCode(user.code);
-            setSecurity(user.security);
-            setLocation(user.location);
-            setDescription(user.description);
+            setName(user.name || '');
+            setCode(user.code || '');
+            setSecurity(user.security || '');
+            setLocation(user.location || '');
+            setDescription(user.description || '');
         }
     }, [user]);
 
@@ -31,18 +36,17 @@ function ViewModalArea({ user, onClose }) {
         };
 
         try {
-            const response = await axios.post(`http://localhost:3000/visualizar/usuario/${user.id}`, formData);
+            const response = await axios.put(`http://localhost:3000/atualizar/area/${user._id}`, formData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             console.log(response.data);
+            resetForm();
+            onClose();
         } catch (error) {
-            console.error("Erro ao pegar os dados:", error);
+            console.error("Erro ao enviar os dados:", error);
         }
-
-        setName('');
-        setCode('');
-        setSecurity('');
-        setLocation('');
-        setDescription('');
-        onClose();
     };
 
     const handleRefuse = (e) => {
@@ -50,11 +54,19 @@ function ViewModalArea({ user, onClose }) {
         onClose();
     };
 
+    const resetForm = () => {
+        setName('');
+        setCode('');
+        setSecurity('');
+        setLocation('');
+        setDescription('');
+    };
+
     return (
         <div id="expanded-modal">
             <div id="expanded-modal-content">
                 <form id="form-area-modal" onSubmit={handleSubmit}>
-                <div className='input-div'>
+                    <div className='input-div'>
                         <label htmlFor="name">Nome:</label>
                         <input
                             type="text"
@@ -74,19 +86,28 @@ function ViewModalArea({ user, onClose }) {
                     </div>
                     <div className='input-div'>
                         <label htmlFor="security">Nível de segurança:</label>
-                        <select
-                            id="security"
-                            name="security"
-                            value={security}
-                            onChange={(e) => setSecurity(e.target.value)}
-                        >
-                            <option value="" disabled selected>
-                                Selecione
-                            </option>
-                            <option value="Baixo">Baixo</option>
-                            <option value="Medio">Médio</option>
-                            <option value="Alto">Alto</option>
-                        </select>
+                        {role === "adm" ? (
+                            <select
+                                id="security"
+                                name="security"
+                                value={security}
+                                onChange={(e) => setSecurity(e.target.value)}
+                            >
+                                <option value="" disabled>
+                                    Selecione
+                                </option>
+                                <option value="Baixo">Baixo</option>
+                                <option value="Medio">Médio</option>
+                                <option value="Alto">Alto</option>
+                            </select>
+                        ) : (
+                            <input
+                                type="text"
+                                id="security"
+                                value={security}
+                                onChange={(e) => setSecurity(e.target.value)} 
+                            />
+                        )}
                     </div>
                     <div className='input-div'>
                         <label htmlFor="location">Localização:</label>
@@ -108,7 +129,9 @@ function ViewModalArea({ user, onClose }) {
                     </div>
                     <div id="buttons-expanded-modal">
                         <button id="refuse-modal" onClick={handleRefuse}>Voltar</button>
-                        <button id="submit-modal" type="submit">Salvar</button>
+                        {role === "adm" && (
+                            <button id="submit-modal" type="submit">Salvar</button>
+                        )}
                     </div>
                 </form>
             </div>

@@ -10,15 +10,25 @@ function AlertModal() {
     const [area, setArea] = useState('');
 
     const handleSubmit = async (e) => {
+        const token = localStorage.getItem('token');
+
         e.preventDefault();
         const formData = {
             "name": name,
             "area": area,
+            "authorization": "Autorizado"
         };
 
         try {
-            const response = await axios.post("http://localhost:3000/cadastro/instancia", formData);
-            console.log("Dados salvos com sucesso:", response.data);
+            const response = await axios.post(
+                "http://localhost:3000/cadastro/instancia",
+                formData,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            );
         } catch (error) {
             console.error("Erro ao salvar os dados:", error);
         }
@@ -28,8 +38,33 @@ function AlertModal() {
         handleClose()
     };
 
-    const handleRefuse = (e) => {
+    const handleRefuse = async (e) => {
         e.preventDefault();
+        const token = localStorage.getItem('token');
+
+        e.preventDefault();
+        const formData = {
+            "name": name,
+            "area": area,
+            "authorization": "Não autorizado"
+        };
+
+        try {
+            const response = await axios.post(
+                "http://localhost:3000/cadastro/instancia",
+                formData,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            );
+        } catch (error) {
+            console.error("Erro ao salvar os dados:", error);
+        }
+
+        setName('');
+        setArea('');
         handleClose()
     };
 
@@ -73,13 +108,11 @@ function AlertModal() {
                             />
                         </div>
                         <div id="buttons-expanded-modal">
-                            <button id="refuse-modal" onClick={handleRefuse}>Recusar</button>
-                            <button id="submit-modal" type="submit">Aceitar</button>
+                            <button id="refuse-modal" onClick={handleRefuse}>Não autorizado</button>
+                            <button id="submit-modal" type="submit">Autorizado</button>
                         </div>
                     </form>
                 }
-
-
             </div>
         </div>
     );

@@ -15,10 +15,15 @@ function VisualizeUsers() {
   const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/visualizar/usuarios"
+        const response = await axios.get("http://localhost:3000/visualizar/usuarios", {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
         );
         setList(response.data);
       } catch (error) {
@@ -87,8 +92,8 @@ function VisualizeUsers() {
                         <td
                           className="icons-area"
                           data-label="Visualizar"
-                          onClick={() => handleViewClick(value)} 
-                          style={{ cursor: 'pointer' }} 
+                          onClick={() => handleViewClick(value)}
+                          style={{ cursor: 'pointer' }}
                         >
                           <FiFileText
                             className="icon-file-text"
@@ -99,8 +104,8 @@ function VisualizeUsers() {
                         <td
                           className="icons-area"
                           data-label="Excluir"
-                          onClick={() => handleViewClick2(value)} 
-                          style={{ cursor: 'pointer' }} 
+                          onClick={() => handleViewClick2(value)}
+                          style={{ cursor: 'pointer' }}
                         >
                           <FaTrash color={"#D01A1A"} size={25} />
                         </td>
