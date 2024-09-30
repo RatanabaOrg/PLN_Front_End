@@ -3,14 +3,54 @@ import axios from "axios";
 import Header from "../../../components/header";
 import NavBar from "../../../components/navBar";
 import "./index.css";
+import { ToastContainer, toast } from 'react-toastify';  
+import 'react-toastify/dist/ReactToastify.css';       
 
 function RegistryArea() {
-  const fetchData = async () => {
+  const [name, setName] = useState("");
+  const [securityLevel, setSecurityLevel] = useState("");
+  const [areaCode, setAreaCode] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const token = localStorage.getItem('token');
+
+    const formData = {
+      name,
+      security: securityLevel,
+      code: areaCode,
+      location,
+      description,
+    };
+
+    console.log(formData);
+
     try {
-      const response = await axios.get("http://localhost:3000/visualizar");
+      const response = await axios.post(
+        "http://localhost:3000/cadastro/area",
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      );
+      toast.success("Dados salvos com sucesso.");
+      resetForm();
     } catch (error) {
-      console.error("Erro ao buscar o histórico de acessos:", error);
+      console.error("Erro ao salvar os dados:", error.response ? error.response.data : error.message);
+      toast.error("Erro ao salvar os dados.");
     }
+  };
+
+  const resetForm = () => {
+    setName('');
+    setSecurityLevel('');
+    setAreaCode('');
+    setLocation('');
+    setDescription('');
   };
 
   return (
@@ -19,22 +59,34 @@ function RegistryArea() {
       <div className="container">
         <NavBar />
         <div id="registry-areas-container">
-          <form id="form-area">
+          <form id="form-area" onSubmit={handleSubmit}>
             <div className="input-div-areas">
               <div className="form-group">
                 <label htmlFor="name">Nome</label>
-                <input type="text" id="name" name="name" placeholder="Nome" />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Nome"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
 
               <div className="form-group">
                 <label htmlFor="security-level">Nível de segurança</label>
-                <select id="security-level" name="security-level">
-                  <option value="" disabled selected>
+                <select
+                  id="security-level"
+                  name="security-level"
+                  value={securityLevel}
+                  onChange={(e) => setSecurityLevel(e.target.value)}
+                >
+                  <option value="" disabled>
                     Selecione
                   </option>
-                  <option value="1">Baixo</option>
-                  <option value="2">Médio</option>
-                  <option value="3">Alto</option>
+                  <option value="Baixo">Baixo</option>
+                  <option value="Medio">Médio</option>
+                  <option value="Alto">Alto</option>
                 </select>
               </div>
             </div>
@@ -48,6 +100,8 @@ function RegistryArea() {
                     id="area-code"
                     name="area-code"
                     placeholder="Código"
+                    value={areaCode}
+                    onChange={(e) => setAreaCode(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -56,7 +110,9 @@ function RegistryArea() {
                     id="location"
                     name="location"
                     placeholder="Localização"
-                  ></textarea>
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                  />
                 </div>
               </div>
               <div className="form-group description">
@@ -65,15 +121,18 @@ function RegistryArea() {
                   id="description"
                   name="description"
                   placeholder="Descrição"
-                ></textarea>
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
               </div>
             </div>
             <div id="button-div">
               <button type="submit" className="submit-button">
-                Entrar
+                Salvar
               </button>
             </div>
           </form>
+          <ToastContainer />
         </div>
       </div>
     </>

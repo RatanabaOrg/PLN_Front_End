@@ -13,12 +13,16 @@ export default function ModalProvider ({ children }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
+    const token = localStorage.getItem("token");  
+
     const videosList = [v1, v2, v3, v4, v5]
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setIsModalVisible(true);
-        }, 30 * 1000); // 2 minutos
+            if (token != null) {
+                setIsModalVisible(true);
+            }
+        }, 120 * 1000); 
 
         return () => clearInterval(interval);
     }, []);

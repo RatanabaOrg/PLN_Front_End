@@ -8,9 +8,15 @@ function AccessHistory() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/visualizar');
+        const response = await axios.get('http://localhost:3000/visualizar/ultimos/acessos', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         setList(response.data);
       } catch (error) {
         console.error("Erro ao buscar o histórico de acessos:", error);
@@ -22,7 +28,7 @@ function AccessHistory() {
     const intervalId = setInterval(fetchData, 5000);
 
     return () => clearInterval(intervalId);
-  }, []); 
+  }, []);
 
   return (
     <>
@@ -38,24 +44,26 @@ function AccessHistory() {
                   <th scope="col">Data</th>
                   <th scope="col">Nome</th>
                   <th scope="col">Área</th>
+                  <th scope="col">Autorização</th>
                 </tr>
               </thead>
               <tbody>
-                  {list.map((value) => (
-                    !value.envio && (
-                      <tr key={value.id}>
-                        <td data-label="Data">{value.data}</td>
-                        <td data-label="Nome">{value.name}</td>
-                        <td data-label="Área">{value.area}</td>
-                      </tr>
-                    )
-                  ))}
+                {list.map((value) => (
+                  !value.envio && (
+                    <tr key={value.id}>
+                      <td data-label="Data">{value.data}</td>
+                      <td data-label="Nome">{value.name}</td>
+                      <td data-label="Área">{value.area}</td>
+                      <td data-label="Área">{value.authorization}</td>
+                    </tr>
+                  )
+                ))}
               </tbody>
-            </table>): (
-              <tr>
-                <td colSpan="3">Nenhum acesso realizado.</td>
-              </tr>
-            )}
+            </table>) : (
+            <tr>
+              <td colSpan="3">Nenhum acesso realizado.</td>
+            </tr>
+          )}
         </div>
       </div>
     </>
