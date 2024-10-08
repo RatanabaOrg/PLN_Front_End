@@ -36,7 +36,7 @@ function VisualizeUsers() {
     const intervalId = setInterval(fetchData, 5000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [isModalVisible]);
 
   const handleViewClick = (user) => {
     setSelectedUser(user);
@@ -116,7 +116,7 @@ function VisualizeUsers() {
             </table>
           ) : (
             <tr>
-              <td colSpan="3">Nenhuma área cadastrada.</td>
+              <td colSpan="3">Nenhum usuário cadastrado.</td>
             </tr>
           )}
 

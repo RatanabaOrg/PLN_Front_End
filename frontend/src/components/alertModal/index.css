@@ -34,6 +34,7 @@
     border-radius: 15px;
     align-items: center;
     justify-content: center;
+    padding-top: 4rem;
 }
 
 #modal-content {
@@ -70,12 +71,20 @@
     gap: 4px
 }
 
-.input-div #name,.input-div #area {
+.input-div #name {
     border: 1px solid #D9D9D9;
     border-radius: 8px;
     width: 23vw;
     height: 2.5rem;
     padding: 1rem;
+}
+
+.input-div #area {
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    width: 23vw;
+    height: 2.6rem;
+    padding: 0 1rem;
 }
 
 #buttons-modal {

@@ -42,3 +42,11 @@
     width: 100%;
     height: 100%;
 }
+
+.logout-section{
+    margin-top: 10%;
+}
+
+.logout-link svg {
+    cursor: pointer;
+}

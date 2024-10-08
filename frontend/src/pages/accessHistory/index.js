@@ -7,6 +7,8 @@ import "./index.css";
 function AccessHistory() {
   const [list, setList] = useState([]);
 
+  localStorage.setItem('historico', 'true');
+
   useEffect(() => {
     const fetchData = async () => {
       var token = localStorage.getItem('token');

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useModal } from '../../contexts/modal';
 import './index.css'
 import axios from "axios";
@@ -8,6 +8,28 @@ function AlertModal() {
     const videoRef = useRef(null);
     const [name, setName] = useState('');
     const [area, setArea] = useState('');
+    const [areas, setAreas] = useState([]);
+    const [selectedArea, setSelectedArea] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(
+                    "http://localhost:3000/visualizar/areas",
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    }
+                )
+                setAreas(response.data)
+            } catch (error) {
+                console.error("Erro ao visualizar areas:", error);
+            }
+        }
+        fetchData()
+    }, []);
 
     const handleSubmit = async (e) => {
         const token = localStorage.getItem('token');
@@ -15,7 +37,7 @@ function AlertModal() {
         e.preventDefault();
         const formData = {
             "name": name,
-            "area": area,
+            "area": selectedArea,
             "authorization": "Autorizado"
         };
 
@@ -45,7 +67,7 @@ function AlertModal() {
         e.preventDefault();
         const formData = {
             "name": name,
-            "area": area,
+            "area": selectedArea,
             "authorization": "Não autorizado"
         };
 
@@ -86,7 +108,7 @@ function AlertModal() {
                 {!isExpanded ?
                     <div id="buttons-modal">
                         <button id="close-modal" onClick={handleClose}>Fechar</button>
-                        <button id="vizualize-modal" onClick={expandModal}>Vizualizar</button>
+                        <button id="vizualize-modal" onClick={expandModal}>Visualizar</button>
                     </div> :
                     <form id="form" onSubmit={handleSubmit}>
                         <div className='input-div'>
@@ -100,12 +122,18 @@ function AlertModal() {
                         </div>
                         <div className='input-div'>
                             <label htmlFor="area">Área:</label>
-                            <input
-                                type="text"
+                            <select
                                 id="area"
-                                value={area}
-                                onChange={(e) => setArea(e.target.value)}
-                            />
+                                value={selectedArea}
+                                onChange={(e) => setSelectedArea(e.target.value)}
+                            >
+                                <option value="">Selecione uma área</option>
+                                {areas.map((area) => (
+                                    <option key={area._id} value={area.name}>
+                                        {area.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div id="buttons-expanded-modal">
                             <button id="refuse-modal" onClick={handleRefuse}>Não autorizado</button>

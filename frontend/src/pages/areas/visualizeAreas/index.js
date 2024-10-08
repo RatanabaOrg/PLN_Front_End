@@ -35,7 +35,7 @@ function VisualizeAreas() {
     fetchData();
     const intervalId = setInterval(fetchData, 5000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [isModalVisible]);
 
   const handleViewClick = (user) => {
     setSelectedUser(user);

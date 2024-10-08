@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import AccessHistory from "../pages/accessHistory";
 import ModalProvider from "../contexts/modal";
 import LastAccess from "../pages/lastAccess";
@@ -11,8 +11,13 @@ import Login from "../pages/login"
 import SignIn from "../pages/signIn"
 
 function RoutesApp() {
-  const role = localStorage.getItem("role");
-  if (role == "adm") {
+  const [role, setRole] = useState(localStorage.getItem("role"));  
+
+  const handleLogin = (newRole) => {
+    setRole(newRole);  
+  };
+
+  if (role === "adm") {
     return (
       <ModalProvider>
         <Routes>
@@ -22,20 +27,19 @@ function RoutesApp() {
           <Route path="/visualizarareas" element={<VisualizeAreas />} />
           <Route path="/visualizarusuarios" element={<VisualizeUsers />} />
           <Route path="/aprovarusuarios" element={<ApproveUsers />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login onLogin={handleLogin} />} />
           <Route path="/criarconta" element={<SignIn />} />
         </Routes>
       </ModalProvider>
-
     );
-  } else if (role == "funcionario") {
+  } else if (role === "funcionario") {
     return (
       <ModalProvider>
         <Routes>
           <Route path="/historico" element={<AccessHistory />} />
           <Route path="/ultimosacessos" element={<LastAccess />} />
           <Route path="/visualizarareas" element={<VisualizeAreas />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login onLogin={handleLogin} />} />
           <Route path="/criarconta" element={<SignIn />} />
         </Routes>
       </ModalProvider>
@@ -43,7 +47,7 @@ function RoutesApp() {
   } else {
     return (
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login onLogin={handleLogin} />} />
         <Route path="/criarconta" element={<SignIn />} />
       </Routes>
     );
