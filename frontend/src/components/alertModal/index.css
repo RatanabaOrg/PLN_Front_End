@@ -107,17 +107,19 @@
     border: none;
     padding: 1rem 1.3rem;
     border-radius: 8px;
-    background-color: #022035;
     color: white;
     min-width: 50%;
 }
 
-#close-modal {
+#vizualize-modal {
+    background-color: #022035;
+}
+
+#close-modal, #notauthorized-modal {
     background-color: #D01A1A;
 }
 
-#submit-modal, #refuse-modal {
-    background-color: #44A754;
+#submit-modal, #notauthorized-modal {
     border: none;
     padding: 1.2rem 1.4rem;
     border-radius: 8px;
@@ -125,7 +127,10 @@
     min-width: 40%;
 }
 
-#refuse-modal {
-    background-color: #04385C;
-    color: white;
+#submit-modal {
+    background-color: #44A754;
 }
+
+/* #refuse-modal {
+    background-color: #04385C;
+} */

@@ -136,7 +136,7 @@ function AlertModal() {
                             </select>
                         </div>
                         <div id="buttons-expanded-modal">
-                            <button id="refuse-modal" onClick={handleRefuse}>Não autorizado</button>
+                            <button id="notauthorized-modal" onClick={handleRefuse}>Não autorizado</button>
                             <button id="submit-modal" type="submit">Autorizado</button>
                         </div>
                     </form>
