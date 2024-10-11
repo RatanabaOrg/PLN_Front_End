@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import "./index.css";
 import axios from "axios";
 import logo from "../../assets/logo2.png";
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../contexts/authContext";
 import { ToastContainer, toast } from 'react-toastify';  
 import 'react-toastify/dist/ReactToastify.css';          
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   
   localStorage.clear();
@@ -46,7 +48,7 @@ function Login() {
         localStorage.setItem('role', userLoged.role);
 
         if (userLoged.approved) {
-          navigate("/historico");
+          login(userLoged.role)
         } else {
           toast.warn("Usuário ainda não foi aprovado.");  
         }
