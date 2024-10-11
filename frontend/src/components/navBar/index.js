@@ -1,6 +1,7 @@
 import "./index.css";
-import React, { useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from "../../contexts/authContext";
+import { useLocation, Link } from 'react-router-dom';
 import { GoClock, GoListUnordered } from 'react-icons/go';
 import { BsArrowLeftRight } from 'react-icons/bs';
 import { IoAddCircleOutline, IoPersonAddOutline } from 'react-icons/io5';
@@ -8,17 +9,13 @@ import { PiUserSquare } from 'react-icons/pi';
 import { ImExit } from "react-icons/im";
 
 function NavBar() {
+  const { logout } = useContext(AuthContext);
   const location = useLocation();
   const [activeItem, setActiveItem] = useState(location.pathname);
   const role = localStorage.getItem("role");
-  const navigate = useNavigate();
 
   const handleHover = (item) => {
     setActiveItem(item);
-  };
-
-  const handleLogout = () => {
-    navigate("/");
   };
 
   const renderAdminMenu = () => (
@@ -70,7 +67,7 @@ function NavBar() {
           </li>
         </ul>
       </div>
-      <div className="logout-section" onClick={handleLogout}>
+      <div className="logout-section" onClick={logout}>
         <p className="logout-link">
           <ImExit size={24} />
         </p>
@@ -106,7 +103,7 @@ function NavBar() {
           </li>
         </ul>
       </div>
-      <div className="logout-section" onClick={handleLogout}>
+      <div className="logout-section" onClick={logout}>
         <p className="logout-link">
           <ImExit size={24} />
         </p>
