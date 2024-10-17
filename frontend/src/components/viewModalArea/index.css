@@ -15,23 +15,19 @@
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255);
-    width: 45.5%;
-    height: 71.5%;
-    margin-top: 1.2rem;
-    margin-left: 2.7rem;
     border-radius: 15px;
     align-items: center;
     justify-content: center;
+    padding: 4rem;
 }
 
 #form-area-modal {
     display: flex;
     flex-direction: column;
-    width: 55%;
-    height: 65%;
-    gap: 30px;
+    gap: 3rem;
     align-items: center;
 }
+
 
 .input-div {
     display: flex;
@@ -55,28 +51,31 @@
     padding: 0 1rem;
 }
 
-.form-group input, .form-group select {
-    height: 2.5rem;
+.input-div-areas2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
+
 
 #buttons-expanded-modal {
     display: flex;
+    justify-content: center;
     width: 100%;
-    margin-top: 2.2%;
-    display: flex;
-    justify-content: space-around;
+    gap: 4rem;
 }
 
 #submit-modal, #refuse-modal {
-    background-color: #44A754;
     border: none;
-    padding: 1.2rem 1.4rem;
+    padding: 1rem 3rem;
     border-radius: 8px;
     color: white;
-    min-width: 40%;
+}
+
+#submit-modal {
+    background-color: #44A754;
 }
 
 #refuse-modal {
     background-color: #04385C;
-    color: white;
 }

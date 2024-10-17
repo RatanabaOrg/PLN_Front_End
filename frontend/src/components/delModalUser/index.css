@@ -24,14 +24,6 @@
     justify-content: center;
 }
 
-#buttons-expanded-modal {
-    display: flex;
-    width: 70%;
-    margin-top: 2.2%;
-    display: flex;
-    justify-content: space-around;
-}
-
 #del-modal-button, #goback-modal {
     background-color: #D01A1A;
     border: none;
