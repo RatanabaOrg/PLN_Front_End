@@ -1,38 +1,6 @@
-#expanded-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-#expanded-modal-content {
+#form-user-modal {
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255);
-    border-radius: 15px;
+    gap: 2rem;
     align-items: center;
-    justify-content: center;
-    padding: 4rem;
-}
-
-#form {
-    display: flex;
-    flex-direction: column;
-    width: 55%;
-    height: 54%;
-    gap: 30px;
-    align-items: center;
-}
-
-.input-div #name,.input-div #area {
-    border: 1px solid #D9D9D9;
-    border-radius: 8px;
-    width: 23vw;
-    height: 2.5rem;
 }

@@ -43,6 +43,7 @@ table th{
 
 .icons-area {
     text-align: center;
+    cursor: pointer;
 }
 
 .icon-file-text {

@@ -4,7 +4,7 @@ import Header from "../../../components/header";
 import NavBar from "../../../components/navBar";
 import { FaTrash } from "react-icons/fa";
 import { GoCheckCircleFill } from "react-icons/go";
-import "./index.css";
+// import "./index.css";
 import ApproveUserModal from "../../../components/approveUserModal";
 import DelModalUser from "../../../components/delModalUser";
 

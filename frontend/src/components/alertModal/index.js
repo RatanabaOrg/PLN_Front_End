@@ -100,7 +100,7 @@ function AlertModal() {
 
     return (
         <div id={isExpanded ? 'expanded-modal' : 'modal'}>
-            <div id={isExpanded ? "expanded-modal-content" : "modal-content"}>
+            <div id={isExpanded ? "expanded-modal-content-alert" : "modal-content"}>
                 <video id={isExpanded ? 'big-video' : 'small-video'} controls autoPlay muted loop >
                     <source src={videosList[currentVideoIndex]} type="video/mp4" alt="Vídeo com o rosto de uma pessoa olhando para a câmera" />
                     Seu navegador não suporta o elemento de vídeo.
@@ -119,8 +119,7 @@ function AlertModal() {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
-                        </div>
-                        <div className='input-div'>
+                            
                             <label htmlFor="area">Área:</label>
                             <select
                                 id="area"
@@ -141,8 +140,8 @@ function AlertModal() {
                         </div>
                     </form>
                 }
-            </div>
         </div>
+        </div >
     );
 };
 

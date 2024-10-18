@@ -49,7 +49,7 @@ function ViewModalUser({ user, onClose }) {
     return (
         <div id="expanded-modal">
             <div id="expanded-modal-content">
-                <form id="form" onSubmit={handleSubmit}>
+                <form id="form-user-modal" onSubmit={handleSubmit}>
                     <div className='input-div'>
                         <label htmlFor="name">Nome:</label>
                         <input

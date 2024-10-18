@@ -66,79 +66,80 @@ function ViewModalArea({ user, onClose }) {
         <div id="expanded-modal">
             <div id="expanded-modal-content">
                 <form id="form-area-modal" onSubmit={handleSubmit}>
-                <div className="input-div-areas">
-                    <div className="input-div-areas2">
-                        <div className='input-div'>
-                            <label htmlFor="name">Nome:</label>
-                            <input
-                                type="text"
-                                id="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                        <div className='input-div'>
-                            <label htmlFor="code">Código:</label>
-                            <input
-                                type="text"
-                                id="code"
-                                value={code}
-                                onChange={(e) => setCode(e.target.value)}
-                            />
-                        </div>
-                        <div className='input-div'>
-                            <label htmlFor="security">Nível de segurança:</label>
-                            {role === "adm" ? (
-                                <select
-                                    id="security"
-                                    name="security"
-                                    value={security}
-                                    onChange={(e) => setSecurity(e.target.value)}
-                                >
-                                    <option value="" disabled>
-                                        Selecione
-                                    </option>
-                                    <option value="Baixo">Baixo</option>
-                                    <option value="Medio">Médio</option>
-                                    <option value="Alto">Alto</option>
-                                </select>
-                            ) : (
+                    <div className="input-div-areas">
+                        <div className="input-div-areas2">
+                            <div className='input-div'>
+                                <label htmlFor="name">Nome:</label>
                                 <input
                                     type="text"
-                                    id="security"
-                                    value={security}
-                                    onChange={(e) => setSecurity(e.target.value)}
+                                    id="name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                 />
-                            )}
+                            </div>
+                            <div className='input-div'>
+                                <label htmlFor="code">Código:</label>
+                                <input
+                                    type="text"
+                                    id="code"
+                                    value={code}
+                                    onChange={(e) => setCode(e.target.value)}
+                                />
+                            </div>
+                            <div className='input-div'>
+                                <label htmlFor="location">Localização:</label>
+                                <input
+                                    type="text"
+                                    id="location"
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="input-div-areas2">
+                            <div className='input-div'>
+                                <label htmlFor="security">Nível de segurança:</label>
+                                {role === "adm" ? (
+                                    <select
+                                        id="security"
+                                        name="security"
+                                        value={security}
+                                        onChange={(e) => setSecurity(e.target.value)}
+                                    >
+                                        <option value="" disabled>
+                                            Selecione
+                                        </option>
+                                        <option value="Baixo">Baixo</option>
+                                        <option value="Medio">Médio</option>
+                                        <option value="Alto">Alto</option>
+                                    </select>
+                                ) : (
+                                    <input
+                                        type="text"
+                                        id="security"
+                                        value={security}
+                                        onChange={(e) => setSecurity(e.target.value)}
+                                    />
+                                )}
+                            </div>
+                            <div className='input-div'>
+                                <label htmlFor="description">Descrição:</label>
+                                <textarea
+                                    id="description"
+                                    name="description"
+                                    placeholder="Descrição" value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="input-div-areas2">
-                        <div className='input-div'>
-                            <label htmlFor="location">Localização:</label>
-                            <input
-                                type="text"
-                                id="location"
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
-                            />
-                        </div>
-                        <div className='input-div'>
-                            <label htmlFor="description">Descrição:</label>
-                            <input
-                                type="text"
-                                id="description"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                            />
-                        </div>
+                    <div id="buttons-expanded-modal">
+                        <button id="refuse-modal" onClick={handleRefuse}>Voltar</button>
+                        {role === "adm" && (
+                            <button id="submit-modal" type="submit">Salvar</button>
+                        )}
                     </div>
-                    </div>
-                        <div id="buttons-expanded-modal">
-                            <button id="refuse-modal" onClick={handleRefuse}>Voltar</button>
-                            {role === "adm" && (
-                                <button id="submit-modal" type="submit">Salvar</button>
-                            )}
-                        </div>
                 </form>
             </div>
         </div>
