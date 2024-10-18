@@ -64,8 +64,8 @@ function VisualizeUsers() {
       <Header />
       <div className="container">
         <NavBar />
-        <div id="visualize-users-container">
-          <h1 id="visualize-users-title">Visualizar Usuários</h1>
+        <div id="visualize-container">
+          <h1 id="visualize-title">Visualizar usuários</h1>
           {list && list.length > 0 ? (
             <table>
               <thead>

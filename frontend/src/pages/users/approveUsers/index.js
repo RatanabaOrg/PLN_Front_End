@@ -77,8 +77,8 @@ function ApproveUsers() {
       <Header />
       <div className="container">
         <NavBar />
-        <div id="visualize-areas-container">
-          <h1 id="visualize-areas-title">Aprovar conta</h1>
+        <div id="visualize-container">
+          <h1 id="visualize-title">Aprovar conta</h1>
           {list && list.length > 0 ? (
             <table>
               <thead>

@@ -6,7 +6,7 @@ import ViewModalArea from "../../../components/viewModalArea";
 import DelModalArea from "../../../components/delModalArea";
 import { FiFileText } from "react-icons/fi";
 import { FaTrash } from "react-icons/fa";
-import "./index.css";
+// import "./index.css";
 
 function VisualizeAreas() {
   const [list, setList] = useState([]);
@@ -64,8 +64,8 @@ function VisualizeAreas() {
       <Header />
       <div className="container">
         <NavBar />
-        <div id="visualize-areas-container">
-          <h1 id="visualize-areas-title">Visualizar Áreas</h1>
+        <div id="visualize-container">
+          <h1 id="visualize-title">Visualizar áreas</h1>
           {list && list.length > 0 ? (
             <table>
               <thead>
