@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/authContext";
 import AccessHistory from "../pages/accessHistory";
 import ModalProvider from "../contexts/modal";
-import LastAccess from "../pages/lastAccess";
+import Alerts from "../pages/alerts";
 import RegistryArea from "../pages/areas/registryArea";
 import VisualizeAreas from "../pages/areas/visualizeAreas";
 import VisualizeUsers from "../pages/users/visualizeUsers";
@@ -28,7 +28,7 @@ function RoutesApp() {
       <ModalProvider>
         <Routes>
           <Route path="/historico" element={<AccessHistory />} />
-          <Route path="/ultimosacessos" element={<LastAccess />} />
+          <Route path="/alertas" element={<Alerts />} />
           <Route path="/cadastrararea" element={<RegistryArea />} />
           <Route path="/visualizarareas" element={<VisualizeAreas />} />
           <Route path="/visualizarusuarios" element={<VisualizeUsers />} />
@@ -41,7 +41,7 @@ function RoutesApp() {
       <ModalProvider>
         <Routes>
           <Route path="/historico" element={<AccessHistory />} />
-          <Route path="/ultimosacessos" element={<LastAccess />} />
+          <Route path="/alertas" element={<Alerts />} />
           <Route path="/visualizarareas" element={<VisualizeAreas />} />
         </Routes>
       </ModalProvider>

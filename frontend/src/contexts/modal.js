@@ -22,7 +22,7 @@ export default function ModalProvider ({ children }) {
             if (token != null) {
                 setIsModalVisible(true);
             }
-        }, 10 * 1000); 
+        }, 120 * 1000); 
 
         return () => clearInterval(interval);
     }, []);
