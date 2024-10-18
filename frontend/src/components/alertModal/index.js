@@ -1,71 +1,80 @@
 import React, { useRef, useState } from 'react';
 import { useModal } from '../../contexts/modal';
-import './index.css'
-import axios from "axios";
+import './index.css';
+import axios from 'axios';
 
 function AlertModal() {
     const { hideModal, expandModal, collapseModal, isExpanded, currentVideoIndex, videosList } = useModal();
     const videoRef = useRef(null);
     const [name, setName] = useState('');
     const [area, setArea] = useState('');
+    const [showAlertOptions, setShowAlertOptions] = useState(false); // Estado para exibir ou ocultar as opções de alerta
+    const [alertType, setAlertType] = useState(''); // Estado para armazenar o tipo de alerta selecionado
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
         const token = localStorage.getItem('token');
 
-        e.preventDefault();
         const formData = {
-            "name": name,
-            "area": area,
-            "authorization": "Autorizado"
+            name,
+            area,
+            authorization: 'Autorizado',
+            alert: "" // Envia o tipo de alerta
         };
 
         try {
             const response = await axios.post(
-                "http://localhost:3000/cadastro/instancia",
+                'http://localhost:3000/cadastro/instancia',
                 formData,
                 {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        Authorization: `Bearer ${token}`
                     }
                 }
             );
+            console.log('Dados salvos com sucesso:', response.data);
         } catch (error) {
-            console.error("Erro ao salvar os dados:", error);
+            console.error('Erro ao salvar os dados:', error);
         }
 
         setName('');
         setArea('');
-        handleClose()
+        setAlertType(''); // Reseta o tipo de alerta
+        handleClose();
     };
 
-    const handleRefuse = async (e) => {
+    const handleRefuse = (e) => {
         e.preventDefault();
-        const token = localStorage.getItem('token');
+        setShowAlertOptions(true); // Exibe as opções de alerta ao clicar em "Não autorizado"
+    };
 
-        e.preventDefault();
+    const handleAlertSelection = async (selectedAlert) => {
+        const token = localStorage.getItem('token');
         const formData = {
-            "name": name,
-            "area": area,
-            "authorization": "Não autorizado"
+            name,
+            area,
+            authorization: 'Não autorizado',
+            alert: selectedAlert
         };
 
         try {
             const response = await axios.post(
-                "http://localhost:3000/cadastro/instancia",
+                'http://localhost:3000/cadastro/instancia',
                 formData,
                 {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        Authorization: `Bearer ${token}`
                     }
                 }
             );
+            console.log('Alerta enviado com sucesso:', response.data);
         } catch (error) {
-            console.error("Erro ao salvar os dados:", error);
+            console.error('Erro ao enviar o alerta:', error);
         }
 
-        setName('');
-        setArea('');
-        handleClose()
+        setShowAlertOptions(false);
+        setAlertType('');
+        handleClose();
     };
 
     const handleClose = () => {
@@ -78,18 +87,19 @@ function AlertModal() {
 
     return (
         <div id={isExpanded ? 'expanded-modal' : 'modal'}>
-            <div id={isExpanded ? "expanded-modal-content" : "modal-content"}>
-                <video id={isExpanded ? 'big-video' : 'small-video'} controls autoPlay muted loop >
-                    <source src={videosList[currentVideoIndex]} type="video/mp4" alt="Vídeo com o rosto de uma pessoa olhando para a câmera" />
+            <div id={isExpanded ? 'expanded-modal-content' : 'modal-content'}>
+                <video id={isExpanded ? 'big-video' : 'small-video'} controls autoPlay muted loop>
+                    <source src={videosList[currentVideoIndex]} type="video/mp4" />
                     Seu navegador não suporta o elemento de vídeo.
                 </video>
-                {!isExpanded ?
+                {!isExpanded ? (
                     <div id="buttons-modal">
                         <button id="close-modal" onClick={handleClose}>Fechar</button>
-                        <button id="vizualize-modal" onClick={expandModal}>Vizualizar</button>
-                    </div> :
+                        <button id="vizualize-modal" onClick={expandModal}>Visualizar</button>
+                    </div>
+                ) : (
                     <form id="form" onSubmit={handleSubmit}>
-                        <div className='input-div'>
+                        <div className="input-div">
                             <label htmlFor="name">Nome:</label>
                             <input
                                 type="text"
@@ -98,7 +108,7 @@ function AlertModal() {
                                 onChange={(e) => setName(e.target.value)}
                             />
                         </div>
-                        <div className='input-div'>
+                        <div className="input-div">
                             <label htmlFor="area">Área:</label>
                             <input
                                 type="text"
@@ -112,10 +122,19 @@ function AlertModal() {
                             <button id="submit-modal" type="submit">Autorizado</button>
                         </div>
                     </form>
-                }
+                )}
+
+                {showAlertOptions && (
+                    <div id="alert-options">
+                        <h3>Selecione o tipo de alerta:</h3>
+                        <button onClick={() => handleAlertSelection('Moderado')}>Moderado</button>
+                        <button onClick={() => handleAlertSelection('Severo')}>Severo</button>
+                        <button onClick={() => handleAlertSelection('Crítico')}>Crítico</button>
+                    </div>
+                )}
             </div>
         </div>
     );
-};
+}
 
 export default AlertModal;

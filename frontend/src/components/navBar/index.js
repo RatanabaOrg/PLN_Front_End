@@ -23,9 +23,9 @@ function NavBar() {
       <div className="menu-section">
         <p className="menu-title">ACESSOS</p>
         <ul className="menu-list">
-          <li className={activeItem === '/ultimosacessos' ? 'active' : ''} onClick={() => handleHover('/ultimosacessos')}>
-            <Link to="/ultimosacessos" className="menu-link">
-              <GoClock size={23} /> Últimos
+          <li className={activeItem === '/alertas' ? 'active' : ''} onClick={() => handleHover('/alertas')}>
+            <Link to="/alertas" className="menu-link">
+              <GoClock size={23} /> Alertas
             </Link>
           </li>
           <li className={activeItem === '/historico' ? 'active' : ''} onClick={() => handleHover('/historico')}>
