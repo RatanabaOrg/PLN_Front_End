@@ -15,30 +15,20 @@
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255);
-    width: 25.5%;
-    height: 40.5%;
-    margin-top: 1.2rem;
-    margin-left: 2.7rem;
     border-radius: 15px;
     align-items: center;
     justify-content: center;
+    padding: 6rem 6rem;
+    gap: 3rem;
 }
 
-#buttons-expanded-modal {
-    display: flex;
-    width: 70%;
-    margin-top: 2.2%;
-    display: flex;
-    justify-content: space-around;
-}
-
-#adm, #func-modal {
+#func-modal, #adm {
     background-color: #D01A1A;
     border: none;
     padding: 1.2rem 1.4rem;
     border-radius: 8px;
     color: white;
-    min-width: 40%;
+    min-width: 50%;
 }
 
 #func-modal {

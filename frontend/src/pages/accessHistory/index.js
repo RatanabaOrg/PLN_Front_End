@@ -8,6 +8,8 @@ function AccessHistory() {
   const [list, setList] = useState([]);
   const [filter, setFilter] = useState("todos");
 
+  localStorage.setItem('historico', 'true');
+
   useEffect(() => {
     const fetchData = async () => {
       var token = localStorage.getItem('token');

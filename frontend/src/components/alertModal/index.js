@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useModal } from '../../contexts/modal';
 import './index.css';
 import axios from 'axios';
@@ -10,16 +10,38 @@ function AlertModal() {
     const [area, setArea] = useState('');
     const [showAlertOptions, setShowAlertOptions] = useState(false); // Estado para exibir ou ocultar as opções de alerta
     const [alertType, setAlertType] = useState(''); // Estado para armazenar o tipo de alerta selecionado
+    const [areas, setAreas] = useState([]);
+    const [selectedArea, setSelectedArea] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(
+                    "http://localhost:3000/visualizar/areas",
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    }
+                )
+                setAreas(response.data)
+            } catch (error) {
+                console.error("Erro ao visualizar areas:", error);
+            }
+        }
+        fetchData()
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
 
         const formData = {
-            name,
-            area,
-            authorization: 'Autorizado',
-            alert: "" // Envia o tipo de alerta
+            "name": name,
+            "area": selectedArea,
+            "authorization": "Autorizado",
+            "alert": "" // Envia o tipo de alerta
         };
 
         try {
@@ -39,22 +61,22 @@ function AlertModal() {
 
         setName('');
         setArea('');
-        setAlertType(''); // Reseta o tipo de alerta
+        setAlertType('');
         handleClose();
     };
 
     const handleRefuse = (e) => {
         e.preventDefault();
-        setShowAlertOptions(true); // Exibe as opções de alerta ao clicar em "Não autorizado"
+        setShowAlertOptions(true);
     };
 
     const handleAlertSelection = async (selectedAlert) => {
         const token = localStorage.getItem('token');
         const formData = {
-            name,
-            area,
-            authorization: 'Não autorizado',
-            alert: selectedAlert
+            "name": name,
+            "area": selectedArea,
+            "authorization": "Não autorizado",
+            "alert": selectedAlert
         };
 
         try {
@@ -87,9 +109,9 @@ function AlertModal() {
 
     return (
         <div id={isExpanded ? 'expanded-modal' : 'modal'}>
-            <div id={isExpanded ? 'expanded-modal-content' : 'modal-content'}>
-                <video id={isExpanded ? 'big-video' : 'small-video'} controls autoPlay muted loop>
-                    <source src={videosList[currentVideoIndex]} type="video/mp4" />
+            <div id={isExpanded ? "expanded-modal-content-alert" : "modal-content"}>
+                <video id={isExpanded ? 'big-video' : 'small-video'} controls autoPlay muted loop >
+                    <source src={videosList[currentVideoIndex]} type="video/mp4" alt="Vídeo com o rosto de uma pessoa olhando para a câmera" />
                     Seu navegador não suporta o elemento de vídeo.
                 </video>
                 {!isExpanded ? (
@@ -107,18 +129,23 @@ function AlertModal() {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
-                        </div>
-                        <div className="input-div">
+                            
                             <label htmlFor="area">Área:</label>
-                            <input
-                                type="text"
+                            <select
                                 id="area"
-                                value={area}
-                                onChange={(e) => setArea(e.target.value)}
-                            />
+                                value={selectedArea}
+                                onChange={(e) => setSelectedArea(e.target.value)}
+                            >
+                                <option value="">Selecione uma área</option>
+                                {areas.map((area) => (
+                                    <option key={area._id} value={area.name}>
+                                        {area.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div id="buttons-expanded-modal">
-                            <button id="refuse-modal" onClick={handleRefuse}>Não autorizado</button>
+                            <button id="notauthorized-modal" onClick={handleRefuse}>Não autorizado</button>
                             <button id="submit-modal" type="submit">Autorizado</button>
                         </div>
                     </form>

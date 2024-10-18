@@ -13,7 +13,14 @@ function Login() {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   
-  localStorage.clear();
+  console.log(localStorage.getItem("historico"))
+  if (localStorage.getItem("historico")) {
+    localStorage.clear();
+  }
+   
+  if (localStorage.getItem("role")) {
+    localStorage.clear();
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,9 +29,6 @@ function Login() {
         email: email,
         password: password,
       });
-
-      console.log(loginResponse);
-      
 
       if (loginResponse.status === 200) {
         const token = loginResponse.data;
