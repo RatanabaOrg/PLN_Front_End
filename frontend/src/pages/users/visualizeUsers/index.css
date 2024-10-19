@@ -35,3 +35,13 @@
     height: 2.5rem;
     padding: 1rem;
 }
+
+@media screen and (max-width: 1280px) {
+    #name-area {
+        width: 100%;
+    }
+    
+    .icons-area {
+        text-align: end;
+    }
+}
