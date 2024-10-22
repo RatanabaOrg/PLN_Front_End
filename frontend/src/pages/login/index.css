@@ -1,14 +1,9 @@
-* {
-    font-family: 'Poppins' , sans-serif;
-}
-
-.login-container {
+.login-container, .signin-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 95vh;
-    position: relative;
+    height: 92vh;
 }
 
 .login-box {
@@ -18,14 +13,8 @@
     padding: 2rem; 
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 30vw;
-    /* height: 56%; */
+    gap: 1rem;
 }
-
-.login-logo {
-    margin-top: 0.5rem;
-}
-
 
 .login-logo img {
     background-color: #022035;
@@ -34,21 +23,21 @@
 }
 
 .login-box h2 {
-    margin-bottom: 1rem;
     font-size: 1.5rem;
     color: #333;
+    margin: 0;
 }
 
 .login-box p {
-    margin-bottom: 1.5rem;
     font-size: 1rem;
     color: #666;
+    margin: 0 0 1rem 0;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 6px;
     margin-bottom: 1rem;
 }
 
@@ -57,6 +46,7 @@
     padding: 0.7rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+    min-width: 320px;
 } 
 
 .btn-login {
@@ -67,7 +57,6 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    margin-top: 0.6rem;
 }
 
 .btn-login:hover {
@@ -75,7 +64,6 @@
 }
 
 .create-account {
-    margin-top: 2rem;
     justify-content: center;
     text-align: center;
 }
@@ -89,17 +77,37 @@
     text-decoration: underline;
 }
 
-footer {
+.login-container footer {
     display: flex;
-    position: absolute;
-    bottom: 10px;
     justify-content: space-between;
     width: 100%;
     font-size: 0.9rem;
     color: #999;
-    padding: 0 2rem;
+    padding: 0 3rem 1.5rem 3rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 
-footer p {
-    margin-bottom: 5px;
+.signin-container footer {
+    position: relative;
+    height: 2rem;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #999;
+    padding: 0 2rem 1rem 2rem;
+}
+
+.signin-container footer p {
+    position: absolute;
+}
+
+.signin-container footer p:first-of-type {
+    left: 0; /* Posiciona o primeiro texto (Ratanaba) no canto esquerdo */
+    bottom: 0;
+}
+
+.signin-container footer p:last-of-type {
+    right: 0; /* Posiciona o segundo texto (Altave) no canto direito */
+    bottom: 0;
 }
