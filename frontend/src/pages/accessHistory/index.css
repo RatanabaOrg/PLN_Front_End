@@ -21,13 +21,13 @@
 }
 
 #filter {
-    padding: 5px;
+    padding: 6px;
     border: 1px solid #e7e6e6;
     border-radius: 8px;
     background-color: #fff;
     height: 2.5rem;
     width: 8vw;
-    
+    min-width: 90px;
 }
 
 table {
@@ -40,6 +40,7 @@ table {
 
 table tr{
     border-bottom: 1px solid #dedede;
+    width: 100%;
 } 
 
 table th, table td{
@@ -94,5 +95,11 @@ table th{
 
     table td:last-child{
         border-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #access-history-container {
+        padding: 0 2rem 0 8rem;
     }
 }

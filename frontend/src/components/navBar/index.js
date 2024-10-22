@@ -84,40 +84,43 @@ function NavBar() {
 
   const renderUserMenu = () => (
     <>
-      <div className="menu-bar">
-        <div>
-          <div className="menu-section">
-            <p className="menu-title">ACESSOS</p>
-            <ul className="menu-list">
-              <li className={activeItem === '/ultimosacessos' ? 'active' : ''} onClick={() => handleHover('/ultimosacessos')}>
-                <Link to="/ultimosacessos" className="menu-link">
-                  <GoClock size={23} /> Últimos
-                </Link>
-              </li>
-              <li className={activeItem === '/historico' ? 'active' : ''} onClick={() => handleHover('/historico')}>
-                <Link to="/historico" className="menu-link">
-                  <BsArrowLeftRight size={22} /> Histórico
-                </Link>
-              </li>
-            </ul>
+      <div className="menu-bar-container">
+        <div className="menu-bar">
+          <div>
+            <div className="menu-section">
+              <p className="menu-title">ACESSOS</p>
+              <ul className="menu-list">
+                <li className={activeItem === '/ultimosacessos' ? 'active' : ''} onClick={() => handleHover('/ultimosacessos')}>
+                  <Link to="/ultimosacessos" className="menu-link">
+                    <GoClock size={23} /> Últimos
+                  </Link>
+                </li>
+                <li className={activeItem === '/historico' ? 'active' : ''} onClick={() => handleHover('/historico')}>
+                  <Link to="/historico" className="menu-link">
+                    <BsArrowLeftRight size={22} /> Histórico
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <hr className="header-horizontal-line" />
+            <div className="menu-section">
+              <p className="menu-title">ÁREAS</p>
+              <ul className="menu-list">
+                <li className={activeItem === '/visualizarareas' ? 'active' : ''} onClick={() => handleHover('/visualizarareas')}>
+                  <Link to="/visualizarareas" className="menu-link">
+                    <GoListUnordered size={25} /> Visualizar
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <hr className="header-horizontal-line" />
-          <div className="menu-section">
-            <p className="menu-title">ÁREAS</p>
-            <ul className="menu-list">
-              <li className={activeItem === '/visualizarareas' ? 'active' : ''} onClick={() => handleHover('/visualizarareas')}>
-                <Link to="/visualizarareas" className="menu-link">
-                  <GoListUnordered size={25} /> Visualizar
-                </Link>
-              </li>
-            </ul>
+          <div className="logout-section" onClick={logout}>
+            <p className="logout-link">
+              <ImExit size={24} />
+            </p>
           </div>
         </div>
-        <div className="logout-section" onClick={logout}>
-          <p className="logout-link">
-            <ImExit size={24} />
-          </p>
-        </div>
+        <div className="vertical-line"></div>
       </div>
     </>
   );
