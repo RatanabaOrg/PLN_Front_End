@@ -29,9 +29,3 @@ h1{
     margin: 1.3rem 0; 
     border: none;
 }
-
-@media screen and (max-width: 1024px) {
-    #form-area {
-        padding: 0 2rem 0 8rem;
-    }
-}

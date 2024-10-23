@@ -16,6 +16,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 80%;
+    transition: transform 0.3s ease;
 }
 
 .vertical-line {
@@ -71,4 +72,52 @@
 
 .logout-link svg {
     cursor: pointer;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    #navBar {
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+    }
+
+    .hamburger {
+        display: block;
+        padding: 10px;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 2000;
+    }
+
+    .menu-bar-container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .menu-bar {
+        transform: translateX(-100%);
+        background-color: white;
+        z-index: 1000;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: transform 0.3s ease;
+    }
+
+    .menu-bar.open {
+        transform: translateX(0);
+    }
+
+    .menu-bar-container.open .menu-bar {
+        transform: translateX(0);
+    }
 }
