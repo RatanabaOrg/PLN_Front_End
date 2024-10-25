@@ -36,6 +36,11 @@ function NavBar() {
                     <BsArrowLeftRight size={22} /> Histórico
                   </Link>
                 </li>
+                <li className={activeItem === '/dashboard' ? 'active' : ''} onClick={() => handleHover('/dashboard')}>
+                  <Link to="/dashboard" className="menu-link">
+                    <BsArrowLeftRight size={22} /> Dashboard
+                  </Link>
+                </li>
               </ul>
             </div>
             <hr className="header-horizontal-line" />

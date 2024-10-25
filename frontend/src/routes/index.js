@@ -10,16 +10,17 @@ import VisualizeUsers from "../pages/users/visualizeUsers";
 import ApproveUsers from "../pages/users/approveUsers";
 import Login from "../pages/login"
 import SignIn from "../pages/signIn"
+import Dashboard from "../pages/dashboard";
 
 function RoutesApp() {
   const { role, setRole } = useContext(AuthContext);
 
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
-    if (!storedRole) {
-      setRole(null);
-    } else {
+    if (storedRole) {
       setRole(storedRole);
+    } else {
+      setRole(null); 
     }
   }, [setRole]);
 
@@ -33,6 +34,7 @@ function RoutesApp() {
           <Route path="/visualizarareas" element={<VisualizeAreas />} />
           <Route path="/visualizarusuarios" element={<VisualizeUsers />} />
           <Route path="/aprovarusuarios" element={<ApproveUsers />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </ModalProvider>
     );
@@ -43,6 +45,7 @@ function RoutesApp() {
           <Route path="/historico" element={<AccessHistory />} />
           <Route path="/alertas" element={<Alerts />} />
           <Route path="/visualizarareas" element={<VisualizeAreas />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </ModalProvider>
     );
