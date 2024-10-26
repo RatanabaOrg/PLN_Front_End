@@ -111,3 +111,35 @@
     right: 0; /* Posiciona o segundo texto (Altave) no canto direito */
     bottom: 0;
 }
+
+@media (max-width: 550px) {
+    .login-box {
+        width: 90%; 
+        padding: 1.5rem; 
+        box-shadow: none;
+    }
+
+    .login-logo img {
+        width: 4rem; 
+    }
+
+    .input-group input {
+        min-width: unset; 
+        padding: 0.6rem; 
+    }
+
+    .btn-login {
+        padding: 0.6rem; 
+    }
+
+    .login-container footer {
+        flex-direction: column; 
+        align-items: center;
+        padding: 0 1rem 1rem 1rem; 
+        font-size: 0.8rem; 
+    }
+
+    .login-container footer p {
+        margin: 0.3rem 0; 
+    }
+}

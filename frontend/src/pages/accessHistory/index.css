@@ -103,3 +103,20 @@ table th{
         padding: 0 2rem 0 8rem;
     }
 }
+
+@media screen and (max-width: 1280px) {
+    #access-history-title {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #access-history-container {
+        padding: 0;
+        width: 100%;
+    }
+
+    #access-history-title {
+        font-size: 1.5rem;
+    }
+}

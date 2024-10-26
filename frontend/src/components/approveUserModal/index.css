@@ -23,7 +23,7 @@
 }
 
 #func-modal, #adm {
-    background-color: #D01A1A;
+    background-color: #04385C;
     border: none;
     padding: 1.2rem 1.4rem;
     border-radius: 8px;
@@ -32,5 +32,18 @@
 }
 
 #func-modal {
-    background-color: #04385C;
+    background-color: #44A754;
+}
+
+@media (max-width: 600px) {
+    #del-modal-content  {
+        width: 100%;
+        padding: 2rem;
+        gap: 2rem;
+    }
+
+    #func-modal, #adm {
+        padding: 1.2rem 0.5rem;
+        min-width: 40%;
+    }
 }

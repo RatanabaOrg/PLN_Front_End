@@ -97,3 +97,25 @@
     }
 
 }
+
+@media (max-width: 600px) {
+    #registry-areas-container, .input-div-areas, #button-div, .submit-button, 
+    .form-group input, .form-group select, .form-group textarea {
+        width: 100%;
+    }
+
+    #form-area {
+        padding: 0;
+    }
+
+    .submit-button {
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .form-group input, .form-group select, .form-group textarea, 
+    .submit-button {
+        min-width: 200px;
+    }
+}

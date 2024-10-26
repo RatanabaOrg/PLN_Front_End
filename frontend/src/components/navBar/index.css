@@ -81,9 +81,9 @@
 
 @media (max-width: 600px) {
     #navBar {
-        width: 100%;
         height: auto;
         margin-left: 0;
+        width: 0%;
     }
 
     .hamburger {
@@ -95,9 +95,14 @@
         z-index: 2000;
     }
 
+    .vertical-line {
+        width: 0px;
+    }
+
     .menu-bar-container {
         display: flex;
         flex-direction: row;
+        min-width: 0px;
     }
 
     .menu-bar {
@@ -111,6 +116,7 @@
         top: 0;
         left: 0;
         transition: transform 0.3s ease;
+        padding: 6rem 2rem 2rem 2rem;
     }
 
     .menu-bar.open {
