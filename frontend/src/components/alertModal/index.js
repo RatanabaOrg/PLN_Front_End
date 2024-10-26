@@ -8,8 +8,8 @@ function AlertModal() {
     const videoRef = useRef(null);
     const [name, setName] = useState('');
     const [area, setArea] = useState('');
-    const [showAlertOptions, setShowAlertOptions] = useState(false); // Estado para exibir ou ocultar as opções de alerta
-    const [alertType, setAlertType] = useState(''); // Estado para armazenar o tipo de alerta selecionado
+    const [showAlertOptions, setShowAlertOptions] = useState(false);
+    const [alertType, setAlertType] = useState('');
     const [areas, setAreas] = useState([]);
     const [selectedArea, setSelectedArea] = useState("");
 
