@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../../components/header";
 import NavBar from "../../components/navBar";
-import "./index.css";
+// import "./index.css";
 
 function Alerts() {
   const [list, setList] = useState([]);

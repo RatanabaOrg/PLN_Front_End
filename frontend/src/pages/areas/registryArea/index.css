@@ -1,7 +1,6 @@
 #registry-areas-container {
     display: flex;
     width: 87.25%;
-    padding: 12rem 16rem;
 }
 
 #form-area {
@@ -23,18 +22,15 @@
 .input-div-areas2 {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1rem;
+    width: 50%;
 }
 
 
 .form-group {
     display: flex;
     flex-direction: column;
-    width: 50%;
     gap: 8px;
-    font-size: 'Poppins', sans-serif;
-    margin-bottom: 2%;
-    min-width: 320px;
 }
 
 .form-group input, .form-group select, .form-group textarea {
@@ -42,8 +38,9 @@
     border-radius: 8px;
     background-color: #fff;
     width: 23vw;
+    min-width: 320px;
     height: 2.5rem;
-    padding: 8px;
+    padding: 6px 1rem;
 }
 
 .form-group textarea  {
@@ -51,7 +48,7 @@
 } 
 
 .description textarea {
-    height: 12vh;
+    height: 15vh;
 }
 
 
@@ -72,4 +69,53 @@
 
 .submit-button:hover {
     background-color: #069bff;
+}
+
+@media screen and (max-width: 1150px) {
+    #form-area {
+        padding: 0 2rem 0 8rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #form-area {
+        padding: 0 2rem 0 8rem;
+    }
+
+    .input-div-areas {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .input-div-areas2 {
+        width: 100%;
+    }
+
+    .submit-button {
+        padding: 1rem 1.3rem;
+        min-width: 320px;
+    }
+
+}
+
+@media (max-width: 600px) {
+    #registry-areas-container, .input-div-areas, #button-div, .submit-button, 
+    .form-group input, .form-group select, .form-group textarea {
+        width: 100%;
+    }
+
+    #form-area {
+        padding: 0;
+    }
+
+    .submit-button {
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .form-group input, .form-group select, .form-group textarea, 
+    .submit-button {
+        min-width: 200px;
+    }
 }

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./index.css";
 import logo from "../../assets/logo2.png";
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+// import "./index.css";
 
 function SignIn() {
   const [name, setName] = useState("");
@@ -39,7 +39,7 @@ function SignIn() {
   };
 
   return (
-    <div className="login-container">
+    <div className="signin-container">
       <div className="login-box">
         <div className="login-logo">
           <img src={logo} alt="Logo" />

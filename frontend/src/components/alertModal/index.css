@@ -88,3 +88,51 @@
     border-radius: 8px;
     color: white;
 }
+
+
+@media (max-width: 768px) {
+    #close-modal, #vizualize-modal {
+        padding: 1rem;
+        min-width: 45%;
+    }
+
+    #modal {
+        right: 0;
+    }
+    #big-video {
+        width: 60%;
+    }
+    
+    #form, #form .input-div, #form .input-div input, #form .input-div select {
+        width: 100%;
+    }
+
+    #expanded-modal-content-alert {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    #form #buttons-expanded-modal button {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 450px) {
+    #small-video, #big-video {
+        width: 100%;
+    }
+
+    #modal {
+        padding: 2%;
+    }
+}
+
+@media (max-width: 360px) {
+    #expanded-modal-content-alert {
+        padding: 1rem;
+    }
+
+    #form .input-div input, #form .input-div select {
+        min-width: 280px;
+    }
+}

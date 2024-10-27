@@ -86,3 +86,36 @@
 #refuse-modal {
     background-color: #04385C;
 }
+
+@media (max-width: 600px) {
+    #expanded-modal-content  {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    #form-area-modal, #form-user-modal, 
+    .input-div #name, .input-div #code, .input-div #location, 
+    .input-div #description, .input-div #security {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    #buttons-expanded-modal {
+        gap: 1rem;
+    }
+
+    #submit-modal, #refuse-modal {
+        padding: 1rem 2rem;
+    }
+    
+    .input-div input, 
+    .input-div select, .input-div textarea {
+        min-width: 300px;
+    }
+
+    .input-div #name, .input-div #code, .input-div #location, 
+    .input-div #description, .input-div #security {
+        min-width: 240px;
+    }
+}

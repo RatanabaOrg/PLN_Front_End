@@ -21,13 +21,13 @@
 }
 
 #filter {
-    padding: 5px;
+    padding: 6px;
     border: 1px solid #e7e6e6;
     border-radius: 8px;
     background-color: #fff;
     height: 2.5rem;
     width: 8vw;
-    
+    min-width: 90px;
 }
 
 table {
@@ -40,6 +40,7 @@ table {
 
 table tr{
     border-bottom: 1px solid #dedede;
+    width: 100%;
 } 
 
 table th, table td{
@@ -50,4 +51,72 @@ table th, table td{
 table th{
     font-size: 1rem;
     letter-spacing: .1rem;
+}
+
+@media screen and (max-width: 1280px) {
+    table{
+        border: 0;
+    }
+
+    table caption{
+        font-size: 1.3em;
+    }
+
+    table thead{
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr{
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: 0.65em;
+    }
+
+    table td{
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: 0.8em;
+        text-align: right;
+    }
+
+    table td::before{
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    table td:last-child{
+        border-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #access-history-container {
+        padding: 0 2rem 0 8rem;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    #access-history-title {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #access-history-container {
+        padding: 0;
+        width: 100%;
+    }
+
+    #access-history-title {
+        font-size: 1.5rem;
+    }
 }
