@@ -75,7 +75,7 @@ function Dashboard() {
     inicio.setDate(inicio.getDate() + 1);
     const fim = new Date(dataFim);
     fim.setDate(fim.getDate() + 1);
-    
+
     logs.forEach(log => {
       const [dataStr] = log.data.split(' ');
       const [dia, mes, ano] = dataStr.split('/');
@@ -120,9 +120,9 @@ function Dashboard() {
       <div className="container">
         <NavBar />
         <div id="access-history-container">
-          <div className="title-filter">
-            <h1 id="access-history-title">Dashboard</h1>
-            <div className="filter-container">
+          <div className="title-filter dash">
+            <h1 id="access-history-title">Acessos por período de tempo</h1>
+            <div className="filter-dash-container">
               <select id="filter" value={filter} onChange={handleFilterChange}>
                 <option value="todos">Todas as áreas</option>
                 {areas.map((area) => (
@@ -131,25 +131,31 @@ function Dashboard() {
                   </option>
                 ))}
               </select>
-              <form>
+            </div>
+          </div>
+          <div className="filter-dash-container">
+            <form className="filter-form">
+              <div className="filter-content">
                 <label htmlFor="start-date">Data de Início:</label>
                 <input
                   type="date"
-                  id="start-date"
+                  id="filter"
                   name="start-date"
                   value={dataInicio}
                   onChange={handleDataInicioChange}
                 />
+              </div>
+              <div className="filter-content">
                 <label htmlFor="end-date">Data de Fim:</label>
                 <input
                   type="date"
-                  id="end-date"
+                  id="filter"
                   name="end-date"
                   value={dataFim}
                   onChange={handleDataFimChange}
                 />
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
           <div className="dashboard">
             <div className="dashboard-left">

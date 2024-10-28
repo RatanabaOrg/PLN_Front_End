@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from "../../contexts/authContext";
 import { useLocation, Link } from 'react-router-dom';
 import { GoClock, GoListUnordered } from 'react-icons/go';
-import { BsArrowLeftRight } from 'react-icons/bs';
+import { BsArrowLeftRight, BsGraphUpArrow } from 'react-icons/bs';
 import { IoAddCircleOutline, IoPersonAddOutline } from 'react-icons/io5';
 import { PiUserSquare } from 'react-icons/pi';
 import { ImExit } from "react-icons/im";
@@ -43,7 +43,7 @@ function NavBar() {
               </li>
                 <li className={activeItem === '/dashboard' ? 'active' : ''} onClick={() => handleHover('/dashboard')}>
                   <Link to="/dashboard" className="menu-link">
-                    <BsArrowLeftRight size={22} /> Dashboard
+                    <BsGraphUpArrow size={22} /> Dashboard
                   </Link>
                 </li>
             </ul>

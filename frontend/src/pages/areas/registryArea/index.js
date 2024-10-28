@@ -74,7 +74,7 @@ function RegistryArea() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="area-code">Código da Área</label>
+                  <label htmlFor="area-code">Código da área</label>
                   <input
                     type="text"
                     id="area-code"
