@@ -1,24 +1,69 @@
-.container {
-    display: flex;
-}
-
-#visualize-users-container {
+#visualize-container {
     width: 87.25%;
-    padding: 5.2rem 25rem 0rem 15rem;
+    padding: 5.2rem 14rem;
 }
 
-#visualize-users-title {
+#visualize-title {
     font-weight: 400;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: #022035;
     padding-bottom: 1.9rem;
 }
 
-.input-div #name, .input-div #email, .input-div #cpf, .input-div #telephone {
+#name-area {
+    width: 60%;
+}
+
+.icons-area {
+    text-align: center;
+    cursor: pointer;
+}
+
+.icon-file-text {
+    stroke-width: 2;
+}
+
+.input-div #nameUser, .input-div #email, .input-div #cpf, .input-div #telephone {
     border: 1px solid #D9D9D9;
     border-radius: 8px;
     width: 23vw;
     height: 2.5rem;
     padding: 1rem;
+}
+
+@media screen and (max-width: 1550px) {
+    #name-area {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    #name-area {
+        width: 100%;
+    }
+    
+    .icons-area {
+        text-align: end;
+    }
+
+    #visualize-title {
+        font-size: 1.7rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #visualize-container {
+        padding: 0 2rem 0 8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #visualize-container {
+        padding: 0;
+        width: 100%;
+    }
+
+    #visualize-title {
+        font-size: 1.5rem;
+    }
 }

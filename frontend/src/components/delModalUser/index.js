@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './index.css';
+// import './index.css';
 import axios from "axios";
 
 function DelModalUser({ user, onClose }) {
@@ -38,7 +38,7 @@ function DelModalUser({ user, onClose }) {
     return (
         <div id="del-modal">
             <div id="del-modal-content">
-                <p>Você tem certeza que deseja apagar o usuário {name}?</p>
+                <p>Você tem certeza que deseja apagar o usuário <b>{name}</b>?</p>
                 <div id="buttons-expanded-modal">
                     <button id="goback-modal" onClick={handleRefuse}>Voltar</button>
                     <button id="del-modal-button" onClick={handleSubmit}>Deletar</button>

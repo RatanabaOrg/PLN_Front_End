@@ -2,21 +2,24 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../../components/header";
 import NavBar from "../../components/navBar";
-import "../accessHistory/index.css";
+// import "./index.css";
 
-function AccessHistory() {
+function Alerts() {
   const [list, setList] = useState([]);
+  const [filter, setFilter] = useState("todos");
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-
     const fetchData = async () => {
+      var token = localStorage.getItem('token');
+      const url = `http://localhost:3000/visualizar/historico/alerta/${filter}`
+      
       try {
-        const response = await axios.get('http://localhost:3000/visualizar/ultimos/acessos', {
+        const response = await axios.get(url, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
+        console.log(response.data)
         setList(response.data);
       } catch (error) {
         console.error("Erro ao buscar o histórico de acessos:", error);
@@ -28,7 +31,11 @@ function AccessHistory() {
     const intervalId = setInterval(fetchData, 5000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [filter]); 
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
+  };
 
   return (
     <>
@@ -36,7 +43,18 @@ function AccessHistory() {
       <div className="container">
         <NavBar />
         <div id="access-history-container">
-          <h1 id="access-history-title">Últimos acessos</h1>
+          <div class="title-filter">
+            <h1 id="access-history-title">Alertas</h1>
+            <div className="filter-container">
+              <select id="filter" value={filter} onChange={handleFilterChange}>
+                <option value="todos">Todos</option>
+                <option value="Moderado">Moderado</option>
+                <option value="Severo">Severo</option>
+                <option value="Crítico">Crítico</option>
+              </select>
+            </div>
+          </div>
+
           {list && list.length > 0 ? (
             <table>
               <thead>
@@ -44,7 +62,7 @@ function AccessHistory() {
                   <th scope="col">Data</th>
                   <th scope="col">Nome</th>
                   <th scope="col">Área</th>
-                  <th scope="col">Autorização</th>
+                  <th scope="col">Alerta</th>
                 </tr>
               </thead>
               <tbody>
@@ -54,14 +72,15 @@ function AccessHistory() {
                       <td data-label="Data">{value.data}</td>
                       <td data-label="Nome">{value.name}</td>
                       <td data-label="Área">{value.area}</td>
-                      <td data-label="Área">{value.authorization}</td>
+                      <td data-label="Alerta">{value.alert}</td>
                     </tr>
                   )
                 ))}
               </tbody>
-            </table>) : (
+            </table>
+          ) : (
             <tr>
-              <td colSpan="3">Nenhum acesso realizado.</td>
+              <td colSpan="4">Nenhum alerta emitido.</td>
             </tr>
           )}
         </div>
@@ -70,4 +89,4 @@ function AccessHistory() {
   );
 }
 
-export default AccessHistory;
+export default Alerts;

@@ -3,8 +3,8 @@ import axios from "axios";
 import Header from "../../../components/header";
 import NavBar from "../../../components/navBar";
 import "./index.css";
-import { ToastContainer, toast } from 'react-toastify';  
-import 'react-toastify/dist/ReactToastify.css';       
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function RegistryArea() {
   const [name, setName] = useState("");
@@ -61,40 +61,20 @@ function RegistryArea() {
         <div id="registry-areas-container">
           <form id="form-area" onSubmit={handleSubmit}>
             <div className="input-div-areas">
-              <div className="form-group">
-                <label htmlFor="name">Nome</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Nome"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="security-level">Nível de segurança</label>
-                <select
-                  id="security-level"
-                  name="security-level"
-                  value={securityLevel}
-                  onChange={(e) => setSecurityLevel(e.target.value)}
-                >
-                  <option value="" disabled>
-                    Selecione
-                  </option>
-                  <option value="Baixo">Baixo</option>
-                  <option value="Medio">Médio</option>
-                  <option value="Alto">Alto</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="input-div-areas">
-              <div className="input-div-left">
+              <div className="input-div-areas2">
                 <div className="form-group">
-                  <label htmlFor="area-code">Código da Área</label>
+                  <label htmlFor="name">Nome</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Nome"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="area-code">Código da área</label>
                   <input
                     type="text"
                     id="area-code"
@@ -104,7 +84,7 @@ function RegistryArea() {
                     onChange={(e) => setAreaCode(e.target.value)}
                   />
                 </div>
-                <div className="form-group">
+                <div className="form-group location">
                   <label htmlFor="location">Localização</label>
                   <textarea
                     id="location"
@@ -115,17 +95,37 @@ function RegistryArea() {
                   />
                 </div>
               </div>
-              <div className="form-group description">
-                <label htmlFor="description">Descrição</label>
-                <textarea
-                  id="description"
-                  name="description"
-                  placeholder="Descrição"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
+              
+              <div className="input-div-areas2">
+                <div className="form-group">
+                  <label htmlFor="security-level">Nível de segurança</label>
+                  <select
+                    id="security-level"
+                    name="security-level"
+                    value={securityLevel}
+                    onChange={(e) => setSecurityLevel(e.target.value)}
+                  >
+                    <option value="" disabled>
+                      Selecione
+                    </option>
+                    <option value="Baixo">Baixo</option>
+                    <option value="Medio">Médio</option>
+                    <option value="Alto">Alto</option>
+                  </select>
+                </div>
+                <div className="form-group description">
+                  <label htmlFor="description">Descrição</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Descrição"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
+
             <div id="button-div">
               <button type="submit" className="submit-button">
                 Salvar
