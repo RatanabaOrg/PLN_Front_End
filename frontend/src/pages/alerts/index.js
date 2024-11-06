@@ -49,13 +49,14 @@ function Alerts() {
               <select id="filter" value={filter} onChange={handleFilterChange}>
                 <option value="todos">Todos</option>
                 <option value="Moderado">Moderado</option>
-                <option value="Severo">Severo</option>
+                <option value="Alto">Alto</option>
                 <option value="Crítico">Crítico</option>
               </select>
             </div>
           </div>
 
           {list && list.length > 0 ? (
+            <div className="table-container">
             <table>
               <thead>
                 <tr>
@@ -72,12 +73,18 @@ function Alerts() {
                       <td data-label="Data">{value.data}</td>
                       <td data-label="Nome">{value.name}</td>
                       <td data-label="Área">{value.area}</td>
-                      <td data-label="Alerta">{value.alert}</td>
+                      <td data-label="Alerta" style={{
+                          color: value.alert === "Moderado" ? "#4A90E2" :
+                          value.alert === "Alto" ? "#FFA500" :
+                          value.alert === "Crítico" ? "#D01A1A" :
+                          "#000000"
+                        }} >{value.alert}</td>
                     </tr>
                   )
                 ))}
               </tbody>
             </table>
+            </div>
           ) : (
             <tr>
               <td colSpan="4">Nenhum alerta emitido.</td>

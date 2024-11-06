@@ -154,9 +154,11 @@ function AlertModal() {
                 {showAlertOptions && (
                     <div id="alert-options">
                         <h3>Selecione o tipo de alerta:</h3>
+                        <div id="alert-buttons">
                         <button onClick={() => handleAlertSelection('Moderado')}>Moderado</button>
-                        <button onClick={() => handleAlertSelection('Severo')}>Severo</button>
+                        <button onClick={() => handleAlertSelection('Alto')}>Alto</button>
                         <button onClick={() => handleAlertSelection('Crítico')}>Crítico</button>
+                        </div>
                     </div>
                 )}
             </div>
