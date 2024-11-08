@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Header from "../../components/header";
 import NavBar from "../../components/navBar";
+import { AuthContext } from "../../contexts/authContext";
 // import "./index.css";
 
 function Alerts() {
   const [list, setList] = useState([]);
   const [filter, setFilter] = useState("todos");
+  const { logout } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,11 +18,17 @@ function Alerts() {
       try {
         const response = await axios.get(url, {
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        console.log(response.data)
-        setList(response.data);
+          'Authorization': `Bearer ${token}`
+        }
+          ,
+          validateStatus: () => true
+        }) 
+
+        if (response.status == 401 || response.status == 400) {
+          logout()
+        } else {
+          setList(response.data);
+        }
       } catch (error) {
         console.error("Erro ao buscar o histórico de acessos:", error);
       }

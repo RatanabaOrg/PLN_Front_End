@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
+import { AuthContext } from "../../contexts/authContext";
 import { useModal } from '../../contexts/modal';
 import './index.css';
 import axios from 'axios';
@@ -12,6 +13,7 @@ function AlertModal() {
     const [alertType, setAlertType] = useState('');
     const [areas, setAreas] = useState([]);
     const [selectedArea, setSelectedArea] = useState("");
+    const { logout } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,10 +24,15 @@ function AlertModal() {
                     {
                         headers: {
                             'Authorization': `Bearer ${token}`
-                        }
+                        },
+                            validateStatus: () => true
+                    }) 
+        
+                    if (response.status == 401 || response.status == 400) {
+                        logout()
+                    } else {
+                        setAreas(response.data)
                     }
-                )
-                setAreas(response.data)
             } catch (error) {
                 console.error("Erro ao visualizar areas:", error);
             }
@@ -50,11 +57,16 @@ function AlertModal() {
                 formData,
                 {
                     headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                        'Authorization': `Bearer ${token}`
+                    },
+                        validateStatus: () => true
+                }) 
+    
+                if (response.status == 401 || response.status == 400) {
+                    logout()
+                } else {
+                    console.log('Dados salvos com sucesso:', response.data);
                 }
-            );
-            console.log('Dados salvos com sucesso:', response.data);
         } catch (error) {
             console.error('Erro ao salvar os dados:', error);
         }

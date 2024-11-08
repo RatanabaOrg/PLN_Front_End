@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from "../../contexts/authContext";
 import './index.css';
 import axios from "axios";
 
 function ViewModalArea({ user, onClose }) {
-    console.log(user);
+    const { logout } = useContext(AuthContext);
 
     const [name, setName] = useState('');
     const [code, setCode] = useState('');
@@ -37,13 +38,18 @@ function ViewModalArea({ user, onClose }) {
 
         try {
             const response = await axios.put(`http://localhost:3000/atualizar/area/${user._id}`, formData, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    validateStatus: () => true
+                }) 
+          
+                if (response.status == 401 || response.status == 400) {
+                  logout()
+                } else {
+                    resetForm();
+                    onClose();
                 }
-            });
-            console.log(response.data);
-            resetForm();
-            onClose();
         } catch (error) {
             console.error("Erro ao enviar os dados:", error);
         }

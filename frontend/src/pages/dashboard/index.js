@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Header from "../../components/header";
 import NavBar from "../../components/navBar";
 import LineGraph from "../../components/graphic";
+import { AuthContext } from "../../contexts/authContext";
 import "./index.css";
 
 function Dashboard() {
@@ -11,20 +12,38 @@ function Dashboard() {
   const [historicos, setHistoricos] = useState([]);
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
+  const { logout } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
         const responseAreas = await axios.get("http://localhost:3000/visualizar/areas", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setAreas(responseAreas.data);
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+            validateStatus: () => true
+        }) 
+  
+        if (responseAreas.status == 401 || responseAreas.status == 400) {
+          logout()
+        } else {
+          setAreas(responseAreas.data);
+        }
 
         const responseHistorico = await axios.get("http://localhost:3000/visualizar/historico", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setHistoricos(responseHistorico.data);
+          headers: { 
+            'Authorization': `Bearer ${token}`
+          },
+            validateStatus: () => true
+        }) 
+        
+        if (responseHistorico.status == 401 || responseHistorico.status == 400) {
+          logout()
+        } else {
+          setHistoricos(responseHistorico.data);
+        }
+
       } catch (error) {
         console.error("Erro ao visualizar áreas:", error);
       }
