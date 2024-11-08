@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Header from "../../components/header";
 import NavBar from "../../components/navBar";
+import { AuthContext } from "../../contexts/authContext";
 import "./index.css";
 
 function AccessHistory() {
   const [list, setList] = useState([]);
   const [filter, setFilter] = useState("todos");
+  const { logout } = useContext(AuthContext);
 
   localStorage.setItem('historico', 'true');
 
@@ -23,8 +25,15 @@ function AccessHistory() {
           headers: {
             'Authorization': `Bearer ${token}`
           }
-        });
-        setList(response.data);
+            ,
+            validateStatus: () => true
+          }) 
+  
+          if (response.status == 401 || response.status == 400) {
+            logout()
+          } else {
+            setList(response.data);
+          }
       } catch (error) {
         console.error("Erro ao buscar o histórico de acessos:", error);
       }

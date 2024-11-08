@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from "../../contexts/authContext";
 import './index.css';
 import axios from "axios";
 
 function ApproveUserModal({ user, onClose }) {
     const [name, setName] = useState(user?.name || '');
     const [error, setError] = useState('');
+    const { logout } = useContext(AuthContext);
 
     useEffect(() => {
         if (user) {
@@ -13,7 +15,6 @@ function ApproveUserModal({ user, onClose }) {
     }, [user]);
 
     const handleUserUpdate = async (role) => {
-        console.log(user);
         
         const token = localStorage.getItem('token');
 
@@ -26,11 +27,16 @@ function ApproveUserModal({ user, onClose }) {
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`
-                    }
+                    },
+                        validateStatus: () => true
+                }) 
+    
+                if (response.status == 401 || response.status == 400) {
+                    logout()
+                } else {
+                    console.log(response.data);
+                    onClose(); 
                 }
-            );
-            console.log(response.data);
-            onClose(); 
         } catch (error) {
             console.error("Erro ao atualizar o usuário:", error);
             setError("Erro ao atualizar o usuário. Tente novamente.");

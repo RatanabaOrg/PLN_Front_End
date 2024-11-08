@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import Header from "../../../components/header";
 import NavBar from "../../../components/navBar";
+import { AuthContext } from "../../../contexts/authContext";
 import "./index.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +13,8 @@ function RegistryArea() {
   const [areaCode, setAreaCode] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
+  const { logout } = useContext(AuthContext);
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,11 +37,17 @@ function RegistryArea() {
         {
           headers: {
             'Authorization': `Bearer ${token}`
-          }
+          },
+            validateStatus: () => true
+        }) 
+
+        if (response.status == 401 || response.status == 400) {
+          logout()
+        } else {
+          toast.success("Dados salvos com sucesso.");
+          resetForm();
         }
-      );
-      toast.success("Dados salvos com sucesso.");
-      resetForm();
+      
     } catch (error) {
       console.error("Erro ao salvar os dados:", error.response ? error.response.data : error.message);
       toast.error("Erro ao salvar os dados.");
