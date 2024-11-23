@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaBars, FaQuestion, FaPaperPlane, FaSpinner } from "react-icons/fa";
+import { FaBars, FaPaperPlane, FaSpinner } from "react-icons/fa";
 import axios from "axios";
 import "./styles.css";
 
@@ -7,8 +7,6 @@ export default function Chat() {
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
-  const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [questionTooltipVisible, setQuestionTooltipVisible] = useState(false);
 
   const textAreaRef = useRef(null);
 
@@ -69,26 +67,10 @@ export default function Chat() {
         id="menuButton"
         className="menu-btn"
         onClick={() => setSideMenuOpen(!sideMenuOpen)}
-        onMouseEnter={() => setTooltipVisible(true)}
-        onMouseLeave={() => setTooltipVisible(false)}
+        title="Chatbot auxiliador"
       >
         <FaBars />
       </button>
-
-      {tooltipVisible && <div className="tooltip">ChatBoot para observação de dados</div>}
-
-      <button
-        id="questionButton"
-        className="question-btn"
-        onMouseEnter={() => setQuestionTooltipVisible(true)}
-        onMouseLeave={() => setQuestionTooltipVisible(false)}
-      >
-        <FaQuestion />
-      </button>
-
-      {questionTooltipVisible && (
-        <div className="questionTooltip">Clique para aprender a usar</div>
-      )}
 
       {sideMenuOpen && (
         <div id="sideMenu" className={`side-menu ${sideMenuOpen ? "open" : ""}`}>
@@ -101,7 +83,7 @@ export default function Chat() {
             {messages.map((msg, index) =>
                 msg.type === "bot-loading" ? (
                   <div key={index} className="botDivLoading">
-                    <FaSpinner className="spinner" />
+                    <FaSpinner className="fa-spinner" />
                   </div>
                 ) : (
                   <div
@@ -119,21 +101,22 @@ export default function Chat() {
                 )
               )}
             </div>
+
             <form className="typeBox" onSubmit={(e) => e.preventDefault()}>
               <textarea
                 id="textArea"
                 ref={textAreaRef}
                 placeholder="Digite sua mensagem..."
-                rows="2"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 onKeyDown={handleTextAreaKeyDown}
               ></textarea>
-              <input type="file" id="fileInput" name="image" accept="image/*" />
+              
               <button id="sendButton" type="button" onClick={sendMessage}>
                 <FaPaperPlane />
               </button>
             </form>
+
           </div>
         </div>
       )}

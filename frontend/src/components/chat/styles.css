@@ -12,46 +12,12 @@
     cursor: pointer;
     align-items: center;
     justify-content: center;
-}
-
-.menu-btn i {
-    color: #333;
+    background-color: transparent;
 }
 
 button.menu-btn:hover {
-    background-color: #5d5d5d9a;
-}
-
-button.menu-btn:hover i {
-    color: rgb(241, 241, 241);
-}
-
-.question-btn {
-    height: 30px;
-    width: 30px;
-    position: fixed;
-    bottom: 25px;
-    right: 10px;
-    font-size: 22px;
-    color: black;
-    border: none;
-    border-radius: 2px;
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-}
-
-.question-btn i {
-    color: #333;
-}
-
-button.question-btn:hover {
-    background-color: #5d5d5d9a;
-}
-
-button.question-btn:hover i {
-    color: rgb(241, 241, 241);
+    height: 32px;
+    width: 32px;
 }
 
 .side-menu {
@@ -60,7 +26,7 @@ button.question-btn:hover i {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgb(236, 240, 238);
+    background-color: #eee;
     overflow: hidden;
     transition: width 0.5s;
     display: flex;
@@ -71,26 +37,21 @@ button.question-btn:hover i {
     width: 500px; 
 }
 
-.side-menu a {
-    padding: 10px 15px;
-    text-decoration: none;
-    font-size: 30px;
-    color: black;
-    display: block;
-    transition: 0.3s;
-}
-
-.side-menu a:hover {
-    color: rgb(192, 192, 192);
-}
-
 .close-btn {
+    height: 30px;
+    width: 30px;
     position: absolute;
     top: 10px;
     right: 20px;
-    font-size: 40px;
+    font-size: 36px;
     color: black;
     cursor: pointer;
+    border: none;
+}
+
+button.close-btn:hover {
+    height: 32px;
+    width: 32px;
 }
 
 .chat-content {
@@ -107,6 +68,7 @@ button.question-btn:hover i {
 #mensages {
     flex-grow: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -115,31 +77,29 @@ button.question-btn:hover i {
 
 .typeBox {
     display: flex;
-    gap: 10px;
     justify-content: space-between;
-    align-items: end;
-    background-color: #d7d7d7;
+    align-items: center;
+    gap: 10px;
     padding: 6px;
-    border-radius: 24px;
     margin-top: auto;
     position: sticky;
     bottom: 0;
+    background-color: #fff;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
 }
 
 #textArea {
-    background-color: #00000000;
     flex: 1;
     padding: 8px;
-    height: 24px; 
+    height: 2.6rem;
     max-height: 200px;
     resize: none; 
     outline: none;
-    border: 2px solid var(--primary-color);
+    border: none;
     font-size: 1rem;
     line-height: 26px;
-    overflow-y: hidden; 
 }
-
 
 .userDiv {
     display: flex;
@@ -176,62 +136,18 @@ button.question-btn:hover i {
     text-align: justify;
 }
 
-label.description {
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
-}
-
-label.description i {
-    color: var(--primary-color);
-}
-
-label#sendImage {
-    margin: 8px;
-    margin-left: 10px;
-    width: 24px;
-    height: 24px;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-}
-
-label#sendImage:hover i {
-    color: #5d5d5d9a;
-}
-
 button#sendButton {
     display: flex;
     justify-content: center;
-    background-color: var(--primary-color);
-    border-radius: 26px;
+    border-radius: 50%;
     padding: 8px;
     border: none;
     cursor: pointer;
-    font-size: 24px;
-    background-color: #33333355;
-}
-
-button#sendButton:hover {
-    background-color: #5d5d5d9a;
-}
-
-button#sendButton:hover i {
-    color: rgb(222, 222, 222);
-}
-
-button#sendButton i {
-    color: black;
-    height: 24px;
-    width: 24px;
-}
-
-input[type="file"] {
-    display: none;
+    background-color: #eee;
 }
 
 ::-webkit-scrollbar {
-    width: 9px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -247,60 +163,24 @@ input[type="file"] {
     background: #888888aa;
 }
 
-#map {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-}
-
-.tooltip {
-    display: none;
-    background: #fff;
-    height: 30px;
-    align-items: center;
-    position: absolute;
-    padding-left: 10px;
-    padding-right: 10px;
-    width: auto;
-    font-size: 1rem;
-    text-align: center;
-    margin-top: -30px ;
-    margin-left: 40px ;
-    border-radius: 2px;
-}
-
-.questionTooltip {
-    display: none;
-    background: #fff;
-    height: 30px;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 236px;
-    font-size: 1rem;
-    text-align: center;
-    margin-top: -30px ;
-    margin-left: -265px ;
-    border-radius: 2px;
-}
-
 .fa-spinner{
-    animation: is-rotating 1s infinite;    
+    animation: is-rotating 1s linear infinite;    
     font-size: 22px;
     color: #333;
 }
+
 .botDivLoading{
     display: flex;
-    margin-left: 16px;
+    align-items: center;
+    width: 100%; 
+    padding-bottom: 16px;
 }
 
 @keyframes is-rotating {
-    to {
-        transform: rotate(1turn);
-    }
+    from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
 }
