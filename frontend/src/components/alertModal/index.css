@@ -1,5 +1,5 @@
 #modal {
-    position: absolute;
+    position: fixed;
     top: 20rem;
     right: 20px;
     padding: 0.7%; 
@@ -67,7 +67,7 @@
 #buttons-modal {
     display: flex;
     justify-content: center;
-    justify-content: space-between;
+    align-items: center;
 }
 
 #close-modal, #vizualize-modal {
@@ -144,9 +144,6 @@
         min-width: 45%;
     }
 
-    #modal {
-        right: 0;
-    }
     #big-video {
         width: 60%;
     }

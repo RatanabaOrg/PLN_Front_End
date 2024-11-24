@@ -16,6 +16,7 @@ function AlertModal() {
     const [areas, setAreas] = useState([]);
     const [selectedArea, setSelectedArea] = useState("");
     const { logout } = useContext(AuthContext);
+    const [showCloseButton, setShowCloseButton] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,14 +28,14 @@ function AlertModal() {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         },
-                            validateStatus: () => true
-                    }) 
-        
-                    if (response.status === 401 || response.status === 400) {
-                        logout()
-                    } else {
-                        setAreas(response.data)
-                    }
+                        validateStatus: () => true
+                    })
+
+                if (response.status === 401 || response.status === 400) {
+                    logout()
+                } else {
+                    setAreas(response.data)
+                }
             } catch (error) {
                 console.error("Erro ao visualizar areas:", error);
             }
@@ -61,14 +62,14 @@ function AlertModal() {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     },
-                        validateStatus: () => true
-                }) 
-    
-                if (response.status === 401 || response.status === 400) {
-                    logout()
-                } else {
-                    console.log('Dados salvos com sucesso:', response.data);
-                }
+                    validateStatus: () => true
+                })
+
+            if (response.status === 401 || response.status === 400) {
+                logout()
+            } else {
+                console.log('Dados salvos com sucesso:', response.data);
+            }
         } catch (error) {
             console.error('Erro ao salvar os dados:', error);
         }
@@ -82,6 +83,7 @@ function AlertModal() {
     const handleRefuse = (e) => {
         e.preventDefault();
         setShowAlertOptions(true);
+        setShowCloseButton(false);
     };
 
     const handleAlertSelection = async (selectedAlert) => {
@@ -124,47 +126,49 @@ function AlertModal() {
     return (
         <div id={isExpanded ? 'expanded-modal' : 'modal'}>
             <div id={isExpanded ? "expanded-modal-content-alert" : "modal-content"}>
-                
+
                 {!isExpanded ? (
                     <div id="buttons-modal">
-                        <IoIosAlert onClick={expandModal}  size={40} color="white"/>   
+                        <IoIosAlert onClick={expandModal} size={40} color="white" />
                     </div>
                 ) : (
                     <>
-                        <IoClose id="btn-close" size={40} onClick={hideModal} color="black"/>
-                    <video id={isExpanded ? 'big-video' : 'small-video'} controls autoPlay muted loop >
-                        <source src={videosList[currentVideoIndex]} type="video/mp4" alt="Vídeo com o rosto de uma pessoa olhando para a câmera" />
-                        Seu navegador não suporta o elemento de vídeo.
-                    </video>
-                    <form id="form" onSubmit={handleSubmit}>
-                        <div className="input-div">
-                            <label htmlFor="name">Nome:</label>
-                            <input
-                                type="text"
-                                id="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                            
-                            <label htmlFor="area">Área:</label>
-                            <select
-                                id="area"
-                                value={selectedArea}
-                                onChange={(e) => setSelectedArea(e.target.value)}
-                            >
-                                <option value="">Selecione uma área</option>
-                                {areas.map((area) => (
-                                    <option key={area._id} value={area.name}>
-                                        {area.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div id="buttons-expanded-modal">
-                            <button id="notauthorized-modal" onClick={handleRefuse}>Não autorizado</button>
-                            <button id="submit-modal" onClick={handleActionAndClose} type="submit">Autorizado</button>
-                        </div>
-                    </form>
+                        {showCloseButton && (
+                            <IoClose id="btn-close" size={40} onClick={hideModal} color="black" />
+                        )}
+                        <video id={isExpanded ? 'big-video' : 'small-video'} controls autoPlay muted loop >
+                            <source src={videosList[currentVideoIndex]} type="video/mp4" alt="Vídeo com o rosto de uma pessoa olhando para a câmera" />
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                        <form id="form" onSubmit={handleSubmit}>
+                            <div className="input-div">
+                                <label htmlFor="name">Nome:</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+
+                                <label htmlFor="area">Área:</label>
+                                <select
+                                    id="area"
+                                    value={selectedArea}
+                                    onChange={(e) => setSelectedArea(e.target.value)}
+                                >
+                                    <option value="">Selecione uma área</option>
+                                    {areas.map((area) => (
+                                        <option key={area._id} value={area.name}>
+                                            {area.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div id="buttons-expanded-modal">
+                                <button id="notauthorized-modal" onClick={handleRefuse}>Não autorizado</button>
+                                <button id="submit-modal" onClick={handleActionAndClose} type="submit">Autorizado</button>
+                            </div>
+                        </form>
                     </>
                 )}
 
@@ -172,9 +176,9 @@ function AlertModal() {
                     <div id="alert-options">
                         <h3>Selecione o tipo de alerta:</h3>
                         <div id="alert-buttons">
-                        <button onClick={() => handleAlertSelection('Moderado')}>Moderado</button>
-                        <button onClick={() => handleAlertSelection('Alto')}>Alto</button>
-                        <button onClick={() => handleAlertSelection('Crítico')}>Crítico</button>
+                            <button onClick={() => handleAlertSelection('Moderado')}>Moderado</button>
+                            <button onClick={() => handleAlertSelection('Alto')}>Alto</button>
+                            <button onClick={() => handleAlertSelection('Crítico')}>Crítico</button>
                         </div>
                     </div>
                 )}

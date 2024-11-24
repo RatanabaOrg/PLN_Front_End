@@ -1,7 +1,7 @@
 .menu-btn {
     height: 70px;
     width: 70px;
-    position: absolute;
+    position: fixed;
     bottom: 2rem;
     right: 20px;
     font-size: 22px;
@@ -133,7 +133,6 @@ button.close-btn:hover {
 
 .botParagraph {
     width: 390px;
-    margin: 10px;
     word-wrap: break-word;
     word-break: break-word;
     white-space: normal;
@@ -187,4 +186,30 @@ button#sendButton {
       to {
         transform: rotate(360deg);
       }
+}
+
+
+@media screen and (max-width: 1024px) {
+    .menu-btn {
+        height: 60px;
+        width: 60px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .menu-btn {
+        height: 50px;
+        width: 50px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .side-menu.open {
+        width: 100%; 
+    }
+
+    .botParagraph {
+        width: 100%; 
+    }
+
 }

@@ -140,7 +140,7 @@ function Dashboard() {
         <NavBar />
         <div id="access-history-container">
           <div className="title-filter dash">
-            <h1 id="access-history-title">Acessos por período de tempo</h1>
+            <h1 id="access-history-title">Acessos ao longo do tempo</h1>
             <div className="filter-dash-container">
               <select id="filter" value={filter} onChange={handleFilterChange}>
                 <option value="todos">Todas as áreas</option>
