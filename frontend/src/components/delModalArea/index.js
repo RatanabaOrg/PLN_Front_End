@@ -11,7 +11,7 @@ function DelModalArea({ user, onClose }) {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.delete(`http://localhost:3000/deletar/area/${user._id}`, {
+            const response = await axios.delete(`http://localhost:8080/deletar/area/${user._id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },

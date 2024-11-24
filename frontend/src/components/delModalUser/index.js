@@ -20,7 +20,7 @@ function DelModalUser({ user, onClose }) {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.delete(`http://localhost:3000/deletar/usuario/${user._id}`, {
+            const response = await axios.delete(`http://localhost:8080/deletar/usuario/${user._id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },

@@ -23,7 +23,7 @@ function AlertModal() {
             try {
                 const token = localStorage.getItem('token');
                 const response = await axios.get(
-                    "http://localhost:3000/visualizar/areas",
+                    "http://localhost:8080/visualizar/areas",
                     {
                         headers: {
                             'Authorization': `Bearer ${token}`
@@ -56,7 +56,7 @@ function AlertModal() {
 
         try {
             const response = await axios.post(
-                'http://localhost:3000/cadastro/instancia',
+                'http://localhost:8080/cadastro/instancia',
                 formData,
                 {
                     headers: {
@@ -97,7 +97,7 @@ function AlertModal() {
 
         try {
             const response = await axios.post(
-                'http://localhost:3000/cadastro/instancia',
+                'http://localhost:8080/cadastro/instancia',
                 formData,
                 {
                     headers: {

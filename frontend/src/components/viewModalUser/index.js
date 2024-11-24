@@ -28,7 +28,7 @@ function ViewModalUser({ user, onClose }) {
         };
 
         try {
-            const response = await axios.put(`http://localhost:3000/atualizar/usuario/${user._id}`, formData,        {
+            const response = await axios.put(`http://localhost:8080/atualizar/usuario/${user._id}`, formData,        {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },

@@ -17,8 +17,8 @@ function AccessHistory() {
       var token = localStorage.getItem('token');
 
       const url = filter === "todos"
-        ? 'http://localhost:3000/visualizar/historico'
-        : 'http://localhost:3000/visualizar/ultimos/acessos';
+        ? 'http://localhost:8080/visualizar/historico'
+        : 'http://localhost:8080/visualizar/ultimos/acessos';
 
       try {
         const response = await axios.get(url, {

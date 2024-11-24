@@ -18,7 +18,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const responseAreas = await axios.get("http://localhost:3000/visualizar/areas", {
+        const responseAreas = await axios.get("http://localhost:8080/visualizar/areas", {
           headers: {
             'Authorization': `Bearer ${token}`
           },
@@ -31,7 +31,7 @@ function Dashboard() {
           setAreas(responseAreas.data);
         }
 
-        const responseHistorico = await axios.get("http://localhost:3000/visualizar/historico", {
+        const responseHistorico = await axios.get("http://localhost:8080/visualizar/historico", {
           headers: { 
             'Authorization': `Bearer ${token}`
           },
