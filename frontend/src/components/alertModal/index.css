@@ -1,10 +1,10 @@
 #modal {
-    position: fixed;
-    bottom: 3%;
-    right: 1%;
+    position: absolute;
+    top: 20rem;
+    right: 20px;
     padding: 0.7%; 
-    background-color: #F3FAFF; 
-    border-radius: 8px; 
+    background-color: #002846; 
+    border-radius: 50px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
     transition: all 0.3s ease;
     z-index: 1;
@@ -28,6 +28,10 @@
     gap: 2rem;
 }
 
+#btn-close {
+    text-align: end;
+    align-self: flex-end;
+}
 #small-video {
     border-radius: 8px;
     width: 23rem;

@@ -3,9 +3,11 @@ import { AuthContext } from "../../contexts/authContext";
 import { useModal } from '../../contexts/modal';
 import './index.css';
 import axios from 'axios';
+import { IoIosAlert } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 
 function AlertModal() {
-    const { hideModal, expandModal, collapseModal, isExpanded, currentVideoIndex, videosList } = useModal();
+    const { hideModal, expandModal, handleActionAndClose, collapseModal, isExpanded, currentVideoIndex, videosList } = useModal();
     const videoRef = useRef(null);
     const [name, setName] = useState('');
     const [area, setArea] = useState('');
@@ -116,22 +118,24 @@ function AlertModal() {
             videoRef.current.pause();
         }
         collapseModal();
-        hideModal();
+        handleActionAndClose()
     };
 
     return (
         <div id={isExpanded ? 'expanded-modal' : 'modal'}>
             <div id={isExpanded ? "expanded-modal-content-alert" : "modal-content"}>
-                <video id={isExpanded ? 'big-video' : 'small-video'} controls autoPlay muted loop >
-                    <source src={videosList[currentVideoIndex]} type="video/mp4" alt="Vídeo com o rosto de uma pessoa olhando para a câmera" />
-                    Seu navegador não suporta o elemento de vídeo.
-                </video>
+                
                 {!isExpanded ? (
                     <div id="buttons-modal">
-                        <button id="close-modal" onClick={handleClose}>Fechar</button>
-                        <button id="vizualize-modal" onClick={expandModal}>Visualizar</button>
+                        <IoIosAlert onClick={expandModal}  size={40} color="white"/>   
                     </div>
                 ) : (
+                    <>
+                        <IoClose id="btn-close" size={40} onClick={hideModal} color="black"/>
+                    <video id={isExpanded ? 'big-video' : 'small-video'} controls autoPlay muted loop >
+                        <source src={videosList[currentVideoIndex]} type="video/mp4" alt="Vídeo com o rosto de uma pessoa olhando para a câmera" />
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
                     <form id="form" onSubmit={handleSubmit}>
                         <div className="input-div">
                             <label htmlFor="name">Nome:</label>
@@ -158,9 +162,10 @@ function AlertModal() {
                         </div>
                         <div id="buttons-expanded-modal">
                             <button id="notauthorized-modal" onClick={handleRefuse}>Não autorizado</button>
-                            <button id="submit-modal" type="submit">Autorizado</button>
+                            <button id="submit-modal" onClick={handleActionAndClose} type="submit">Autorizado</button>
                         </div>
                     </form>
+                    </>
                 )}
 
                 {showAlertOptions && (

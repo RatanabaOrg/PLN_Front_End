@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaBars, FaPaperPlane, FaSpinner } from "react-icons/fa";
+import { FaPaperPlane, FaSpinner } from "react-icons/fa";
+import { IoIosChatbubbles } from "react-icons/io";
 import axios from "axios";
 import "./styles.css";
 
@@ -65,7 +66,7 @@ export default function Chat() {
         onClick={() => setSideMenuOpen(!sideMenuOpen)}
         title="Chatbot auxiliador"
       >
-        <FaBars />
+        <IoIosChatbubbles size={100}/>
       </button>
 
       {sideMenuOpen && (
