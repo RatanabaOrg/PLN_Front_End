@@ -15,7 +15,7 @@ function AccessHistory() {
   useEffect(() => {
     const fetchData = async () => {
       var token = localStorage.getItem('token');
-      
+
       const url = filter === "todos"
         ? 'http://localhost:3000/visualizar/historico'
         : 'http://localhost:3000/visualizar/ultimos/acessos';
@@ -44,7 +44,7 @@ function AccessHistory() {
     const intervalId = setInterval(fetchData, 5000);
 
     return () => clearInterval(intervalId);
-  }, [filter]); 
+  }, [filter]);
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
@@ -67,6 +67,7 @@ function AccessHistory() {
           </div>
 
           {list && list.length > 0 ? (
+            <div className="table-container">
             <table>
               <thead>
                 <tr>
@@ -83,12 +84,17 @@ function AccessHistory() {
                       <td data-label="Data">{value.data}</td>
                       <td data-label="Nome">{value.name}</td>
                       <td data-label="Área">{value.area}</td>
-                      <td data-label="Autorização">{value.authorization}</td>
+                      <td data-label="Autorização" style={{
+                          color: value.authorization === "Não autorizado" ? "#D01A1A" : 
+                          value.authorization === "Autorizado" ? "#44A754" :
+                          "#000000"
+                        }} >{value.authorization}</td>
                     </tr>
                   )
                 ))}
               </tbody>
             </table>
+            </div>
           ) : (
             <tr>
               <td colSpan="4">Nenhum acesso realizado.</td>

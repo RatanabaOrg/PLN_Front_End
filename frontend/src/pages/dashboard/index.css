@@ -1,10 +1,47 @@
 .dashboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     padding-top: 1.9rem;
 }
 
 .dashboard-left{
     background-color: white;
-    /* width: 60%; */
+    width: 70%;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+}
+
+.dashboard-right{
+    background-color: white;
+    width: 25%;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#card-title, #card-number, #card-day {
+    color: #022035;
+    text-align: center;
+    margin: 0;
+}
+
+#card-title {
+    font-weight: 400;
+    font-size: 1.6rem;
+}
+
+#card-number {
+    font-weight: 900;
+    font-size: 5rem;
+}
+
+#card-day {
+    font-size: 1.2rem;
 }
 
 .filter-dash-container  {
