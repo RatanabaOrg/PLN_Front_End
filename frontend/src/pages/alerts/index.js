@@ -24,7 +24,7 @@ function Alerts() {
           validateStatus: () => true
         }) 
 
-        if (response.status == 401 || response.status == 400) {
+        if (response.status === 401 || response.status === 400) {
           logout()
         } else {
           setList(response.data);

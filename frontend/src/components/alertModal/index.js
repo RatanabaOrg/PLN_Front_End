@@ -30,7 +30,7 @@ function AlertModal() {
                             validateStatus: () => true
                     }) 
         
-                    if (response.status == 401 || response.status == 400) {
+                    if (response.status === 401 || response.status === 400) {
                         logout()
                     } else {
                         setAreas(response.data)
@@ -64,7 +64,7 @@ function AlertModal() {
                         validateStatus: () => true
                 }) 
     
-                if (response.status == 401 || response.status == 400) {
+                if (response.status === 401 || response.status === 400) {
                     logout()
                 } else {
                     console.log('Dados salvos com sucesso:', response.data);

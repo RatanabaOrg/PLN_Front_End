@@ -18,7 +18,7 @@ function DelModalArea({ user, onClose }) {
                     validateStatus: () => true
                 }) 
 
-                if (response.status == 401 || response.status == 400) {
+                if (response.status === 401 || response.status === 400) {
                     logout()
                 } else {
                     console.log("Área deletada com sucesso:", response.data);

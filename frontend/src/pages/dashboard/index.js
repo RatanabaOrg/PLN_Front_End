@@ -25,7 +25,7 @@ function Dashboard() {
             validateStatus: () => true
         }) 
   
-        if (responseAreas.status == 401 || responseAreas.status == 400) {
+        if (responseAreas.status === 401 || responseAreas.status === 400) {
           logout()
         } else {
           setAreas(responseAreas.data);
@@ -38,7 +38,7 @@ function Dashboard() {
             validateStatus: () => true
         }) 
         
-        if (responseHistorico.status == 401 || responseHistorico.status == 400) {
+        if (responseHistorico.status === 401 || responseHistorico.status === 400) {
           logout()
         } else {
           setHistoricos(responseHistorico.data);

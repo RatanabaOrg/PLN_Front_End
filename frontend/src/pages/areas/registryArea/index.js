@@ -41,7 +41,7 @@ function RegistryArea() {
             validateStatus: () => true
         }) 
 
-        if (response.status == 401 || response.status == 400) {
+        if (response.status === 401 || response.status === 400) {
           logout()
         } else {
           toast.success("Dados salvos com sucesso.");

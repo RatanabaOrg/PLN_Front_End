@@ -27,7 +27,7 @@ function DelModalUser({ user, onClose }) {
                     validateStatus: () => true
                 }) 
 
-                if (response.status == 401 || response.status == 400) {
+                if (response.status === 401 || response.status === 400) {
                     logout()
                 } else {
                     console.log("Usuário deletado:", response.data);
