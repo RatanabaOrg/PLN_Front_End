@@ -114,7 +114,7 @@ function ApproveUsers() {
             </table>
           ) : (
             <tr>
-              <td colSpan="3">Nenhum usuário cadastrado.</td>
+              <td colSpan="3">Nenhum usuário esperando aprovação.</td>
             </tr>
           )}
         </div>
