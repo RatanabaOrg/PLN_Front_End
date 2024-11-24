@@ -18,27 +18,27 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const responseAreas = await axios.get("http://localhost:3000/visualizar/areas", {
+        const responseAreas = await axios.get("http://localhost:8080/visualizar/areas", {
           headers: {
             'Authorization': `Bearer ${token}`
           },
             validateStatus: () => true
         }) 
   
-        if (responseAreas.status == 401 || responseAreas.status == 400) {
+        if (responseAreas.status === 401 || responseAreas.status === 400) {
           logout()
         } else {
           setAreas(responseAreas.data);
         }
 
-        const responseHistorico = await axios.get("http://localhost:3000/visualizar/historico", {
+        const responseHistorico = await axios.get("http://localhost:8080/visualizar/historico", {
           headers: { 
             'Authorization': `Bearer ${token}`
           },
             validateStatus: () => true
         }) 
         
-        if (responseHistorico.status == 401 || responseHistorico.status == 400) {
+        if (responseHistorico.status === 401 || responseHistorico.status === 400) {
           logout()
         } else {
           setHistoricos(responseHistorico.data);
@@ -140,7 +140,7 @@ function Dashboard() {
         <NavBar />
         <div id="access-history-container">
           <div className="title-filter dash">
-            <h1 id="access-history-title">Acessos por período de tempo</h1>
+            <h1 id="access-history-title">Acessos ao longo do tempo</h1>
             <div className="filter-dash-container">
               <select id="filter" value={filter} onChange={handleFilterChange}>
                 <option value="todos">Todas as áreas</option>

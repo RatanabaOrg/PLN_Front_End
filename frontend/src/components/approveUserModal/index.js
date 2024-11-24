@@ -19,7 +19,7 @@ function ApproveUserModal({ user, onClose }) {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.put(`http://localhost:3000/atualizar/usuario/${user._id}`, 
+            const response = await axios.put(`http://localhost:8080/atualizar/usuario/${user._id}`, 
                 {
                     "approved": true,
                     "role": role
@@ -31,7 +31,7 @@ function ApproveUserModal({ user, onClose }) {
                         validateStatus: () => true
                 }) 
     
-                if (response.status == 401 || response.status == 400) {
+                if (response.status === 401 || response.status === 400) {
                     logout()
                 } else {
                     console.log(response.data);

@@ -28,14 +28,14 @@ function ViewModalUser({ user, onClose }) {
         };
 
         try {
-            const response = await axios.put(`http://localhost:3000/atualizar/usuario/${user._id}`, formData,        {
+            const response = await axios.put(`http://localhost:8080/atualizar/usuario/${user._id}`, formData,        {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },
                     validateStatus: () => true
             }) 
 
-            if (response.status == 401 || response.status == 400) {
+            if (response.status === 401 || response.status === 400) {
                 logout()
             } else {
                 console.log(response.data);

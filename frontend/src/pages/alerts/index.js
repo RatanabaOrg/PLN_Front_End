@@ -13,7 +13,7 @@ function Alerts() {
   useEffect(() => {
     const fetchData = async () => {
       var token = localStorage.getItem('token');
-      const url = `http://localhost:3000/visualizar/historico/alerta/${filter}`
+      const url = `http://localhost:8080/visualizar/historico/alerta/${filter}`
       
       try {
         const response = await axios.get(url, {
@@ -24,7 +24,7 @@ function Alerts() {
           validateStatus: () => true
         }) 
 
-        if (response.status == 401 || response.status == 400) {
+        if (response.status === 401 || response.status === 400) {
           logout()
         } else {
           setList(response.data);

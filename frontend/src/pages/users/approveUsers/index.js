@@ -21,14 +21,14 @@ function ApproveUsers() {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/visualizar/usuariosParaAprovar', {
+        const response = await axios.get('http://localhost:8080/visualizar/usuariosParaAprovar', {
           headers: {
             'Authorization': `Bearer ${token}`
           },
             validateStatus: () => true
         }) 
   
-        if (response.status == 401 || response.status == 400) {
+        if (response.status === 401 || response.status === 400) {
           logout()
         } else {
           setList(response.data);
@@ -69,7 +69,7 @@ function ApproveUsers() {
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.get('http://localhost:3000/visualizar/usuariosParaAprovar', {
+      const response = await axios.get('http://localhost:8080/visualizar/usuariosParaAprovar', {
         headers: {
           'Authorization': `Bearer ${token}`
         }

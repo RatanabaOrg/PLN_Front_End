@@ -11,6 +11,7 @@ import ApproveUsers from "../pages/users/approveUsers";
 import Login from "../pages/login"
 import SignIn from "../pages/signIn"
 import Dashboard from "../pages/dashboard";
+import Chat from "../components/chat";
 
 function RoutesApp() {
   const { role, setRole } = useContext(AuthContext);
@@ -27,6 +28,7 @@ function RoutesApp() {
   if (role === "adm") {
     return (
       <ModalProvider>
+        <Chat/>
         <Routes>
           <Route path="/historico" element={<AccessHistory />} />
           <Route path="/alertas" element={<Alerts />} />
@@ -41,6 +43,7 @@ function RoutesApp() {
   } else if (role === "funcionario") {
     return (
       <ModalProvider>
+        <Chat/>
         <Routes>
           <Route path="/historico" element={<AccessHistory />} />
           <Route path="/alertas" element={<Alerts />} />
