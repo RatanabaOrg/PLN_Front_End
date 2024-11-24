@@ -3,7 +3,7 @@
     width: 30px;
     position: absolute;
     top: 20px;
-    left: 20px;
+    right: 20px;
     font-size: 22px;
     color: black;
     border: none;
@@ -25,12 +25,13 @@ button.menu-btn:hover {
     width: 0;
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     background-color: #eee;
     overflow: hidden;
     transition: width 0.5s;
     display: flex;
     flex-direction: column;
+    z-index: 1000;
 }
 
 .side-menu.open {

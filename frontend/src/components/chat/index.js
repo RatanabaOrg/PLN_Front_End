@@ -14,12 +14,8 @@ export default function Chat() {
     setMessages([
       {
         type: "bot",
-        text: "Seja bem vindo! Aqui você pode adicionar camadas de dados.",
-      },
-      {
-        type: "bot",
-        text: "Aonde eu ...",
-      },
+        text: "Seja bem vindo! Aqui você pode fazer perguntas de como utilizar nosso sistema.",
+      }
     ]);
   }, []);
 
