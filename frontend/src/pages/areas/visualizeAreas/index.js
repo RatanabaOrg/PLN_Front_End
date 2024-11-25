@@ -22,7 +22,7 @@ function VisualizeAreas() {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.get('http://localhost:8080/visualizar/areas', {
+      const response = await axios.get('http://3.212.163.76:8080/visualizar/areas', {
         headers: {
           'Authorization': `Bearer ${token}`
         },

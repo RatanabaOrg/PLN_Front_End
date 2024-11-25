@@ -13,7 +13,7 @@ function Alerts() {
   useEffect(() => {
     const fetchData = async () => {
       var token = localStorage.getItem('token');
-      const url = `http://localhost:8080/visualizar/historico/alerta/${filter}`
+      const url = `http://3.212.163.76:8080/visualizar/historico/alerta/${filter}`
       
       try {
         const response = await axios.get(url, {

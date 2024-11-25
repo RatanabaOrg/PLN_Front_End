@@ -40,7 +40,7 @@ export default function Chat() {
     setMessages((prev) => [...prev, loadingMessage]);
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/chatbot", { "text": text });
+      const response = await axios.post("http://3.212.163.76:5000/chatbot", { "text": text });
       const botText = response.data.response 
 
       setMessages((prev) => [
