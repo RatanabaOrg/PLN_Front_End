@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from "../../contexts/authContext";
+
 import './index.css';
 import axios from "axios";
 
@@ -7,6 +9,7 @@ function ViewModalUser({ user, onClose }) {
     const [email, setEmail] = useState(user?.email || '');
     const [telephone, setTelephone] = useState(user?.telephone || '');
     const token = localStorage.getItem('token');
+    const { logout } = useContext(AuthContext);
 
     useEffect(() => {
         if (user) {
@@ -25,12 +28,18 @@ function ViewModalUser({ user, onClose }) {
         };
 
         try {
-            const response = await axios.put(`http://localhost:3000/atualizar/usuario/${user._id}`, formData,        {
+            const response = await axios.put(`http://3.212.163.76:8080/atualizar/usuario/${user._id}`, formData,        {
                 headers: {
-                  'Authorization': `Bearer ${token}`
-                }
-              });
-            console.log(response.data);
+                    'Authorization': `Bearer ${token}`
+                },
+                    validateStatus: () => true
+            }) 
+
+            if (response.status === 401 || response.status === 400) {
+                logout()
+            } else {
+                console.log(response.data);
+            }
         } catch (error) {
             console.error("Erro ao pegar os dados:", error);
         }

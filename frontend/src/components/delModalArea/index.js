@@ -1,25 +1,31 @@
-import React from 'react';
+import { React, useContext } from 'react';
 import './index.css';
 import axios from "axios";
+import { AuthContext } from "../../contexts/authContext";
 
 function DelModalArea({ user, onClose }) {
-    console.log(user);
+    const { logout } = useContext(AuthContext);
     
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.delete(`http://localhost:3000/deletar/area/${user._id}`, {
+            const response = await axios.delete(`http://3.212.163.76:8080/deletar/area/${user._id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
+                },
+                    validateStatus: () => true
+                }) 
+
+                if (response.status === 401 || response.status === 400) {
+                    logout()
+                } else {
+                    console.log("Área deletada com sucesso:", response.data);
                 }
-            });
-            console.log("Área deletada com sucesso:", response.data);
-            // Você pode adicionar lógica adicional aqui, como uma atualização do estado ou uma notificação
         } catch (error) {
             console.error("Erro ao deletar a área:", error);
-            alert("Erro ao tentar deletar a área. Por favor, tente novamente."); // Feedback para o usuário
+            alert("Erro ao tentar deletar a área. Por favor, tente novamente.");
         }
 
         onClose();

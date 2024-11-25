@@ -5,13 +5,13 @@ function LineGraph({ data}) {
 
   return (
     <ResponsiveContainer width="100%" height={400}>
-      <LineChart data={data}>
+      <LineChart data={data} margin={{ top: 20, right: 20, bottom: 20 }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="data" />
+        <XAxis dataKey="data" angle={-30} textAnchor="end" />
         <YAxis />
         <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="acessos" stroke="#8884d8" strokeWidth={2} />
+        <Legend wrapperStyle={{ paddingTop: 20 }} />
+        <Line type="monotone" dataKey="acessos" stroke="#0A8FEF" strokeWidth={2} />
       </LineChart>
     </ResponsiveContainer>
   );

@@ -2,7 +2,7 @@ import React, { useState, useContext} from "react";
 import "./index.css";
 import axios from "axios";
 import logo from "../../assets/logo2.png";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from "../../contexts/authContext";
 import { ToastContainer, toast } from 'react-toastify';  
 import 'react-toastify/dist/ReactToastify.css';          
@@ -11,7 +11,6 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
   
   console.log(localStorage.getItem("historico"))
   if (localStorage.getItem("historico")) {
@@ -25,7 +24,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const loginResponse = await axios.post("http://localhost:3000/login/usuario", {
+      const loginResponse = await axios.post("http://3.212.163.76:8080/login/usuario", {
         email: email,
         password: password,
       });
@@ -35,7 +34,7 @@ function Login() {
 
         localStorage.setItem('token', token);
 
-        const userResponse = await axios.get('http://localhost:3000/visualizar/usuarios', {
+        const userResponse = await axios.get('http://3.212.163.76:8080/visualizar/usuarios', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

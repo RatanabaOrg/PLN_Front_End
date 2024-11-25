@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Header from "../../components/header";
 import NavBar from "../../components/navBar";
 import LineGraph from "../../components/graphic";
+import { AuthContext } from "../../contexts/authContext";
 import "./index.css";
 
 function Dashboard() {
@@ -11,20 +12,72 @@ function Dashboard() {
   const [historicos, setHistoricos] = useState([]);
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
+  const [diaSemAcesso, setDiaSemAcesso] = useState();
+  const { logout } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const responseAreas = await axios.get("http://localhost:3000/visualizar/areas", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setAreas(responseAreas.data);
 
-        const responseHistorico = await axios.get("http://localhost:3000/visualizar/historico", {
-          headers: { Authorization: `Bearer ${token}` },
+        // Fetch areas
+        const responseAreas = await axios.get("http://3.212.163.76:8080/visualizar/areas", {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          validateStatus: () => true
         });
-        setHistoricos(responseHistorico.data);
+
+        if (responseAreas.status === 401 || responseAreas.status === 400) {
+          logout();
+        } else {
+          setAreas(responseAreas.data);
+        }
+
+        // Fetch historico
+        const responseHistorico = await axios.get("http://3.212.163.76:8080/visualizar/historico", {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          validateStatus: () => true
+        });
+
+        if (responseHistorico.status === 401 || responseHistorico.status === 400) {
+          logout();
+        } else {
+          setHistoricos(responseHistorico.data);
+        }
+
+        // Fetch days without access based on filter
+        let response;
+        console.log(filter);
+        if (filter === "todos") {
+          console.log(token);
+          
+          response = await axios.get(`http://3.212.163.76:8080/maiorTempoSemAcesso`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          console.log(response);
+          console.log(response.data.diasSemAcesso);
+          setDiaSemAcesso(response.data.diasSemAcesso);
+
+        } else {
+          response = await axios.post(
+            `http://3.212.163.76:8080/diasSemAcesso/`,
+            { area: filter },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+          console.log(response);
+          console.log(response.data.diasSemAcesso);
+          setDiaSemAcesso(response.data.diasSemAcesso);
+        }
+
+
       } catch (error) {
         console.error("Erro ao visualizar áreas:", error);
       }
@@ -38,7 +91,9 @@ function Dashboard() {
 
     setDataInicio(primeiroDia.toISOString().substring(0, 10));
     setDataFim(diaAtual.toISOString().substring(0, 10));
-  }, []);
+
+  }, [filter]);
+
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
@@ -121,7 +176,7 @@ function Dashboard() {
         <NavBar />
         <div id="access-history-container">
           <div className="title-filter dash">
-            <h1 id="access-history-title">Acessos por período de tempo</h1>
+            <h1 id="access-history-title">Acessos ao longo do tempo</h1>
             <div className="filter-dash-container">
               <select id="filter" value={filter} onChange={handleFilterChange}>
                 <option value="todos">Todas as áreas</option>

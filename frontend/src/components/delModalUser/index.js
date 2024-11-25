@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // import './index.css';
 import axios from "axios";
+import { AuthContext } from "../../contexts/authContext";
 
 function DelModalUser({ user, onClose }) {
     const [name, setName] = useState('');
+    const { logout } = useContext(AuthContext);
 
     useEffect(() => {
         console.log(user);
@@ -18,13 +20,19 @@ function DelModalUser({ user, onClose }) {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.delete(`http://localhost:3000/deletar/usuario/${user._id}`, {
+            const response = await axios.delete(`http://3.212.163.76:8080/deletar/usuario/${user._id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
-                }
-            });
-            console.log("Usuário deletado:", response.data);
-            onClose(); 
+                },
+                    validateStatus: () => true
+                }) 
+
+                if (response.status === 401 || response.status === 400) {
+                    logout()
+                } else {
+                    console.log("Usuário deletado:", response.data);
+                    onClose(); 
+                } 
         } catch (error) {
             console.error("Erro ao deletar o usuário:", error.response ? error.response.data : error.message);
         }

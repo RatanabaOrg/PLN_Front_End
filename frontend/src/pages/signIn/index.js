@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../assets/logo2.png";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -11,12 +11,11 @@ function SignIn() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/cadastro/usuario", {
+      const response = await axios.post("http://3.212.163.76:8080/cadastro/usuario", {
         name: name,
         email: email,
         telephone: phone,

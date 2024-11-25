@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Header from "../../../components/header";
 import NavBar from "../../../components/navBar";
 import ViewModalArea from "../../../components/viewModalArea";
 import DelModalArea from "../../../components/delModalArea";
+import { AuthContext } from "../../../contexts/authContext";
 import { FiFileText } from "react-icons/fi";
 import { FaTrash } from "react-icons/fa";
 // import "./index.css";
@@ -13,6 +14,7 @@ function VisualizeAreas() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalVisible2, setIsModalVisible2] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const { logout } = useContext(AuthContext);
 
   const role = localStorage.getItem("role");
 
@@ -20,12 +22,18 @@ function VisualizeAreas() {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.get('http://localhost:3000/visualizar/areas', {
+      const response = await axios.get('http://3.212.163.76:8080/visualizar/areas', {
         headers: {
           'Authorization': `Bearer ${token}`
-        }
-      });
-      setList(response.data);
+        },
+          validateStatus: () => true
+      }) 
+
+      if (response.status === 401 || response.status === 400) {
+        logout()
+      } else {
+        setList(response.data);
+      }
     } catch (error) {
       console.error("Erro ao buscar o histórico de acessos:", error);
     }

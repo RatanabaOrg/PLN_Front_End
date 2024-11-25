@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Header from "../../../components/header";
 import NavBar from "../../../components/navBar";
@@ -7,24 +7,32 @@ import { GoCheckCircleFill } from "react-icons/go";
 // import "./index.css";
 import ApproveUserModal from "../../../components/approveUserModal";
 import DelModalUser from "../../../components/delModalUser";
+import { AuthContext } from "../../../contexts/authContext";
 
 function ApproveUsers() {
   const [list, setList] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalVisible2, setIsModalVisible2] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const { logout } = useContext(AuthContext);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
 
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/visualizar/usuariosParaAprovar', {
+        const response = await axios.get('http://3.212.163.76:8080/visualizar/usuariosParaAprovar', {
           headers: {
             'Authorization': `Bearer ${token}`
-          }
-        });
-        setList(response.data);
+          },
+            validateStatus: () => true
+        }) 
+  
+        if (response.status === 401 || response.status === 400) {
+          logout()
+        } else {
+          setList(response.data);
+        }
       } catch (error) {
         console.error("Erro ao buscar o histórico de acessos:", error);
       }
@@ -61,7 +69,7 @@ function ApproveUsers() {
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.get('http://localhost:3000/visualizar/usuariosParaAprovar', {
+      const response = await axios.get('http://3.212.163.76:8080/visualizar/usuariosParaAprovar', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -106,7 +114,7 @@ function ApproveUsers() {
             </table>
           ) : (
             <tr>
-              <td colSpan="3">Nenhum usuário cadastrado.</td>
+              <td colSpan="3">Nenhum usuário esperando aprovação.</td>
             </tr>
           )}
         </div>

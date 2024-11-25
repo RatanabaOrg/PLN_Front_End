@@ -45,4 +45,6 @@ O site será aberto automaticamente no seu navegador.
 
 - Repositório Backend: [https://github.com/RatanabaOrg/PLN_Back_End.git](https://github.com/RatanabaOrg/PLN_Back_End.git)
 
+- Repositório Chatbot: [https://github.com/RatanabaOrg/PLN_Chatbot.git](https://github.com/RatanabaOrg/PLN_Chatbot.git)
+
 <br>

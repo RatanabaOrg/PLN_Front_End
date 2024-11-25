@@ -19,7 +19,7 @@ function VisualizeUsers() {
     
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/visualizar/usuarios", {
+        const response = await axios.get("http://3.212.163.76:8080/visualizar/usuarios", {
           headers: {
             'Authorization': `Bearer ${token}`
           }
