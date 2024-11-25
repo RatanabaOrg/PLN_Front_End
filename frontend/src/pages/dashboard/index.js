@@ -202,13 +202,6 @@ function Dashboard() {
             <div className="dashboard-left">
               <LineGraph data={dadosOrdenados} />
             </div>
-            <div className="dashboard-right">
-              <h1 id="card-title">Quanto tempo sem acesso</h1>
-              <div>
-                <p id="card-number">{diaSemAcesso}</p>
-                <p id="card-day">dias</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
