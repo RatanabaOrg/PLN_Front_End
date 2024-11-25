@@ -21,7 +21,7 @@ function ApproveUsers() {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/visualizar/usuariosParaAprovar', {
+        const response = await axios.get('http://3.212.163.76:8080/visualizar/usuariosParaAprovar', {
           headers: {
             'Authorization': `Bearer ${token}`
           },
@@ -69,7 +69,7 @@ function ApproveUsers() {
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.get('http://localhost:8080/visualizar/usuariosParaAprovar', {
+      const response = await axios.get('http://3.212.163.76:8080/visualizar/usuariosParaAprovar', {
         headers: {
           'Authorization': `Bearer ${token}`
         }

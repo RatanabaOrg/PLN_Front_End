@@ -24,7 +24,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const loginResponse = await axios.post("http://localhost:8080/login/usuario", {
+      const loginResponse = await axios.post("http://3.212.163.76:8080/login/usuario", {
         email: email,
         password: password,
       });
@@ -34,7 +34,7 @@ function Login() {
 
         localStorage.setItem('token', token);
 
-        const userResponse = await axios.get('http://localhost:8080/visualizar/usuarios', {
+        const userResponse = await axios.get('http://3.212.163.76:8080/visualizar/usuarios', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

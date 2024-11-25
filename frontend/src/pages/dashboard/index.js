@@ -19,31 +19,64 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const responseAreas = await axios.get("http://localhost:8080/visualizar/areas", {
+
+        // Fetch areas
+        const responseAreas = await axios.get("http://3.212.163.76:8080/visualizar/areas", {
           headers: {
             'Authorization': `Bearer ${token}`
           },
-            validateStatus: () => true
-        }) 
-  
+          validateStatus: () => true
+        });
+
         if (responseAreas.status === 401 || responseAreas.status === 400) {
-          logout()
+          logout();
         } else {
           setAreas(responseAreas.data);
         }
 
-        const responseHistorico = await axios.get("http://localhost:8080/visualizar/historico", {
-          headers: { 
+        // Fetch historico
+        const responseHistorico = await axios.get("http://3.212.163.76:8080/visualizar/historico", {
+          headers: {
             'Authorization': `Bearer ${token}`
           },
-            validateStatus: () => true
-        }) 
-        
+          validateStatus: () => true
+        });
+
         if (responseHistorico.status === 401 || responseHistorico.status === 400) {
-          logout()
+          logout();
         } else {
           setHistoricos(responseHistorico.data);
         }
+
+        // Fetch days without access based on filter
+        let response;
+        console.log(filter);
+        if (filter === "todos") {
+          console.log(token);
+          
+          response = await axios.get(`http://3.212.163.76:8080/maiorTempoSemAcesso`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          console.log(response);
+          console.log(response.data.diasSemAcesso);
+          setDiaSemAcesso(response.data.diasSemAcesso);
+
+        } else {
+          response = await axios.post(
+            `http://3.212.163.76:8080/diasSemAcesso/`,
+            { area: filter },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+          console.log(response);
+          console.log(response.data.diasSemAcesso);
+          setDiaSemAcesso(response.data.diasSemAcesso);
+        }
+
 
       } catch (error) {
         console.error("Erro ao visualizar áreas:", error);
@@ -58,28 +91,9 @@ function Dashboard() {
 
     setDataInicio(primeiroDia.toISOString().substring(0, 10));
     setDataFim(diaAtual.toISOString().substring(0, 10));
-  }, []);
 
-  useEffect(() => {    
-    const token = localStorage.getItem("token");
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`http://127.0.0.1:8080/diasSemAcesso/${filter}`, {
-          headers: { 
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        console.log(response.data.msg);
-        setDiaSemAcesso(response.data.msg);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-  
-    fetchData();
   }, [filter]);
-  
-  
+
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);

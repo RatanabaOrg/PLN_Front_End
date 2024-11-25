@@ -15,7 +15,7 @@ function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/cadastro/usuario", {
+      const response = await axios.post("http://3.212.163.76:8080/cadastro/usuario", {
         name: name,
         email: email,
         telephone: phone,

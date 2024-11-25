@@ -32,7 +32,7 @@ function RegistryArea() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/cadastro/area",
+        "http://3.212.163.76:8080/cadastro/area",
         formData,
         {
           headers: {
