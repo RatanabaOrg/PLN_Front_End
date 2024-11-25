@@ -12,6 +12,7 @@ function Dashboard() {
   const [historicos, setHistoricos] = useState([]);
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
+  const [diaSemAcesso, setDiaSemAcesso] = useState();
   const { logout } = useContext(AuthContext);
 
   useEffect(() => {
@@ -58,6 +59,27 @@ function Dashboard() {
     setDataInicio(primeiroDia.toISOString().substring(0, 10));
     setDataFim(diaAtual.toISOString().substring(0, 10));
   }, []);
+
+  useEffect(() => {    
+    const token = localStorage.getItem("token");
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8080/diasSemAcesso/${filter}`, {
+          headers: { 
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        console.log(response.data.msg);
+        setDiaSemAcesso(response.data.msg);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
+  }, [filter]);
+  
+  
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
@@ -183,7 +205,7 @@ function Dashboard() {
             <div className="dashboard-right">
               <h1 id="card-title">Quanto tempo sem acesso</h1>
               <div>
-                <p id="card-number">2</p>
+                <p id="card-number">{diaSemAcesso}</p>
                 <p id="card-day">dias</p>
               </div>
             </div>

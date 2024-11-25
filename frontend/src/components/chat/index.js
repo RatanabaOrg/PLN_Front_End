@@ -30,6 +30,9 @@ export default function Chat() {
   const sendMessage = async () => {
     if (!text.trim()) return;
 
+    console.log(text);
+    
+
     setMessages((prev) => [...prev, { type: "user", text }]);
     setText("");
 
@@ -37,13 +40,8 @@ export default function Chat() {
     setMessages((prev) => [...prev, loadingMessage]);
 
     try {
-      const response = await axios.post("http://localhost:5502/add", { text });
-      const botText =
-        response.data.response === "camada"
-          ? "Qual camada você gostaria?"
-          : response.data.response === "especificar"
-            ? "Não entendi sua mensagem. Poderia reformular de maneira mais objetiva, por favor?"
-            : response.data.response;
+      const response = await axios.post("http://127.0.0.1:5000/chatbot", { "text": text });
+      const botText = response.data.response 
 
       setMessages((prev) => [
         ...prev.slice(0, -1),
